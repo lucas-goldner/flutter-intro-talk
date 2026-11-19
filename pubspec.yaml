@@ -1,0 +1,39 @@
+name: flutter_intro_talk
+description: "Flutter 入門 — 90分でわかる Flutter のすべて"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.8.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_deck: ^0.21.0
+  mesh: ^0.3.0
+  flutter_highlight: ^0.7.0
+  flutter_svg: ^2.0.10
+  cupertino_icons: ^1.0.8
+  rive: 0.14.0-dev.8
+  pretty_qr_code: ^3.5.0
+  # Live demo of the Screen → ViewModel → Repository → ApiClient architecture.
+  flutter_riverpod: ^3.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/
+
+  # Every fragment shader in the deck. Keep in sync with
+  # lib/core/shaders/shader_assets.dart.
+  shaders:
+    - shaders/title_aurora.frag
+    - shaders/galaxy_button.frag
+    - shaders/chaos_button.frag
+    - shaders/music_background.frag
