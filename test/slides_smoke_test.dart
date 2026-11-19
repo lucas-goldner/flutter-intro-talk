@@ -24,35 +24,37 @@ import 'package:flutter_intro_talk/slides/s14_genui.dart';
 import 'package:flutter_intro_talk/slides/s15_gallery.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+Map<String, List<FlutterDeckSlideWidget>> deckSections() => {
+  's01': titleAndProblemSlides,
+  's02': agendaAndBenefitsSlides,
+  's03': counterSlides,
+  's04': treeSlides,
+  's05': touchJourneySlides,
+  's06': widgetTypeSlides,
+  's07': stateSlides,
+  's08': architectureSlides,
+  's09': renderingSlides,
+  's10': beyondSlides,
+  's11': nativeSlides,
+  's12': aiSlides,
+  's13': testingSlides,
+  's14': genUiSlides,
+  's15': gallerySlides,
+};
+
 void main() {
-  final sections = <String, List<FlutterDeckSlideWidget>>{
-    's01': titleAndProblemSlides,
-    's02': agendaAndBenefitsSlides,
-    's03': counterSlides,
-    's04': treeSlides,
-    's05': touchJourneySlides,
-    's06': widgetTypeSlides,
-    's07': stateSlides,
-    's08': architectureSlides,
-    's09': renderingSlides,
-    's10': beyondSlides,
-    's11': nativeSlides,
-    's12': aiSlides,
-    's13': testingSlides,
-    's14': genUiSlides,
-    's15': gallerySlides,
-  };
+  final sections = deckSections();
 
   test('routes are unique across the deck', () {
     final routes = [
-      for (final s in sections.values) ...s.map((w) => w.configuration.route),
+      for (final s in sections.values) ...s.map((w) => w.configuration!.route),
     ];
     expect(routes.toSet().length, routes.length);
   });
 
   for (final MapEntry(key: name, value: slides) in sections.entries) {
     for (final slide in slides) {
-      final route = slide.configuration.route;
+      final route = slide.configuration!.route;
       testWidgets('$name $route', (tester) async {
         tester.view.physicalSize = const Size(1920, 1080);
         tester.view.devicePixelRatio = 1;
@@ -61,7 +63,7 @@ void main() {
         await tester.pumpWidget(FlutterIntroDeck(slides: [slide]));
         await tester.pump(const Duration(milliseconds: 600));
 
-        for (var i = 1; i < slide.configuration.steps; i++) {
+        for (var i = 1; i < slide.configuration!.steps; i++) {
           await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
           await tester.pump(const Duration(milliseconds: 700));
         }

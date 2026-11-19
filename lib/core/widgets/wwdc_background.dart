@@ -37,32 +37,32 @@ class _WwdcBackgroundState extends State<WwdcBackground>
   }
 
   List<Color> get _palette => switch (widget.mood) {
-        GradientMood.hero => const [
-            DeckColors.pink,
-            DeckColors.purple,
-            DeckColors.blue,
-          ],
-        GradientMood.cool => const [
-            DeckColors.blue,
-            DeckColors.cyan,
-            DeckColors.purple,
-          ],
-        GradientMood.warm => const [
-            DeckColors.orange,
-            DeckColors.pink,
-            DeckColors.orange,
-          ],
-        GradientMood.violet => const [
-            DeckColors.purple,
-            DeckColors.pink,
-            DeckColors.blue,
-          ],
-        GradientMood.calm => const [
-            DeckColors.blue,
-            DeckColors.purple,
-            DeckColors.cyan,
-          ],
-      };
+    GradientMood.hero => const [
+      DeckColors.pink,
+      DeckColors.purple,
+      DeckColors.blue,
+    ],
+    GradientMood.cool => const [
+      DeckColors.blue,
+      DeckColors.cyan,
+      DeckColors.purple,
+    ],
+    GradientMood.warm => const [
+      DeckColors.orange,
+      DeckColors.pink,
+      DeckColors.orange,
+    ],
+    GradientMood.violet => const [
+      DeckColors.purple,
+      DeckColors.pink,
+      DeckColors.blue,
+    ],
+    GradientMood.calm => const [
+      DeckColors.blue,
+      DeckColors.purple,
+      DeckColors.cyan,
+    ],
+  };
 
   @override
   Widget build(BuildContext context) {

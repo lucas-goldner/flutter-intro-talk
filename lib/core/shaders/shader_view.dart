@@ -67,10 +67,8 @@ class ShaderFrame {
   final bool pressed;
 }
 
-typedef ShaderUniformSetter = void Function(
-  ui.FragmentShader shader,
-  ShaderFrame frame,
-);
+typedef ShaderUniformSetter =
+    void Function(ui.FragmentShader shader, ShaderFrame frame);
 
 /// Paints a full-rect fragment shader, ticking every frame and tracking the
 /// pointer. The deck's live demos are all built on top of this.

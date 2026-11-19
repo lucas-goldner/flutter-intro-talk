@@ -7,24 +7,21 @@ import 'dart:ui' as ui;
 
 class Slide43Thanks extends FlutterDeckSlideWidget {
   const Slide43Thanks({super.key})
-      : super(
-          configuration: const FlutterDeckSlideConfiguration(
-            route: '/thanks',
-            header: FlutterDeckHeaderConfiguration(
-              title: 'ご清聴ありがとうございました！',
-            ),
-            steps: 4, // Background → Title → Handle/QR → flutter_deck credit
-          ),
-        );
+    : super(
+        configuration: const FlutterDeckSlideConfiguration(
+          route: '/thanks',
+          header: FlutterDeckHeaderConfiguration(title: 'ご清聴ありがとうございました！'),
+          steps: 4, // Background → Title → Handle/QR → flutter_deck credit
+        ),
+      );
 
   @override
   FlutterDeckSlide build(BuildContext context) {
     return FlutterDeckSlide.custom(
       builder: (context) {
         return FlutterDeckSlideStepsBuilder(
-          builder: (context, stepNumber) => _ClosingSlideContent(
-            stepNumber: stepNumber,
-          ),
+          builder: (context, stepNumber) =>
+              _ClosingSlideContent(stepNumber: stepNumber),
         );
       },
     );
@@ -96,42 +93,37 @@ class _ClosingSlideContentState extends State<_ClosingSlideContent>
     _titleZoomAnimation = Tween<double>(
       begin: 0.5,
       end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _titleController,
-      curve: Curves.easeOut,
-    ));
+    ).animate(CurvedAnimation(parent: _titleController, curve: Curves.easeOut));
 
-    _handleSlideAnimation = Tween<Offset>(
-      begin: const Offset(-1.5, 0),
-      end: Offset.zero,
-    ).animate(CurvedAnimation(
-      parent: _bottomController,
-      curve: Curves.easeOutCubic,
-    ));
+    _handleSlideAnimation =
+        Tween<Offset>(begin: const Offset(-1.5, 0), end: Offset.zero).animate(
+          CurvedAnimation(
+            parent: _bottomController,
+            curve: Curves.easeOutCubic,
+          ),
+        );
 
-    _qrSlideAnimation = Tween<Offset>(
-      begin: const Offset(1.5, 0),
-      end: Offset.zero,
-    ).animate(CurvedAnimation(
-      parent: _bottomController,
-      curve: Curves.easeOutCubic,
-    ));
+    _qrSlideAnimation =
+        Tween<Offset>(begin: const Offset(1.5, 0), end: Offset.zero).animate(
+          CurvedAnimation(
+            parent: _bottomController,
+            curve: Curves.easeOutCubic,
+          ),
+        );
 
-    _creditFadeAnimation = Tween<double>(
-      begin: 0,
-      end: 1,
-    ).animate(CurvedAnimation(
-      parent: _creditController,
-      curve: const Interval(0.0, 0.5, curve: Curves.easeInOut),
-    ));
+    _creditFadeAnimation = Tween<double>(begin: 0, end: 1).animate(
+      CurvedAnimation(
+        parent: _creditController,
+        curve: const Interval(0.0, 0.5, curve: Curves.easeInOut),
+      ),
+    );
 
-    _creditShimmerAnimation = Tween<double>(
-      begin: 0,
-      end: 1,
-    ).animate(CurvedAnimation(
-      parent: _creditController,
-      curve: const Interval(0.5, 1.0, curve: Curves.easeInOut),
-    ));
+    _creditShimmerAnimation = Tween<double>(begin: 0, end: 1).animate(
+      CurvedAnimation(
+        parent: _creditController,
+        curve: const Interval(0.5, 1.0, curve: Curves.easeInOut),
+      ),
+    );
 
     _startAnimations();
   }
@@ -206,10 +198,7 @@ class _ClosingSlideContentState extends State<_ClosingSlideContent>
                     ),
                   ),
                   // Subtle stars/dots pattern
-                  CustomPaint(
-                    painter: _StarsPainter(),
-                    size: Size.infinite,
-                  ),
+                  CustomPaint(painter: _StarsPainter(), size: Size.infinite),
                 ],
               ),
             );
@@ -252,9 +241,9 @@ class _ClosingSlideContentState extends State<_ClosingSlideContent>
                       RiveLoading() => const SizedBox.shrink(),
                       RiveFailed() => const SizedBox.shrink(),
                       RiveLoaded() => RiveWidget(
-                          controller: state.controller,
-                          fit: Fit.contain,
-                        ),
+                        controller: state.controller,
+                        fit: Fit.contain,
+                      ),
                     },
                   ),
                 ),
@@ -271,21 +260,19 @@ class _ClosingSlideContentState extends State<_ClosingSlideContent>
                         child: Text(
                           'ご清聴ありがとうございました！',
                           textAlign: TextAlign.center,
-                          style: FlutterDeckTheme.of(context)
-                              .textTheme
-                              .display
+                          style: FlutterDeckTheme.of(context).textTheme.display
                               .copyWith(
-                            fontSize: 72,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            shadows: [
-                              Shadow(
-                                color: Colors.black.withValues(alpha: 0.3),
-                                blurRadius: 20,
-                                offset: const Offset(0, 8),
+                                fontSize: 72,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                shadows: [
+                                  Shadow(
+                                    color: Colors.black.withValues(alpha: 0.3),
+                                    blurRadius: 20,
+                                    offset: const Offset(0, 8),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
                         ),
                       ),
                     );
@@ -314,11 +301,7 @@ class _ClosingSlideContentState extends State<_ClosingSlideContent>
                                 Colors.white,
                                 Colors.white.withValues(alpha: 0.7),
                               ],
-                              stops: [
-                                0.0,
-                                _creditShimmerAnimation.value,
-                                1.0,
-                              ],
+                              stops: [0.0, _creditShimmerAnimation.value, 1.0],
                             ).createShader(bounds);
                           },
                           child: Text(
@@ -383,9 +366,7 @@ class _ClosingSlideContentState extends State<_ClosingSlideContent>
                         const SizedBox(height: 4),
                         Text(
                           'X (Twitter) で繋がりましょう',
-                          style: FlutterDeckTheme.of(context)
-                              .textTheme
-                              .subtitle
+                          style: FlutterDeckTheme.of(context).textTheme.subtitle
                               .copyWith(
                                 fontSize: 32,
                                 color: Colors.white.withValues(alpha: 0.8),
@@ -430,9 +411,7 @@ class _ClosingSlideContentState extends State<_ClosingSlideContent>
                         const SizedBox(height: 8),
                         Text(
                           'スキャンして繋がる！',
-                          style: FlutterDeckTheme.of(context)
-                              .textTheme
-                              .subtitle
+                          style: FlutterDeckTheme.of(context).textTheme.subtitle
                               .copyWith(
                                 fontSize: 28,
                                 color: Colors.white.withValues(alpha: 0.9),

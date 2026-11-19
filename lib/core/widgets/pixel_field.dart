@@ -69,8 +69,11 @@ class _PixelFieldPainter extends CustomPainter {
         final glint = math.pow(wave, 8).toDouble();
         final a = (0.06 + 0.55 * glint) * fade;
         if (a <= 0.01) continue;
-        paint.color = Color.lerp(color, Colors.white, glint * 0.5)!
-            .withValues(alpha: a.clamp(0.0, 1.0));
+        paint.color = Color.lerp(
+          color,
+          Colors.white,
+          glint * 0.5,
+        )!.withValues(alpha: a.clamp(0.0, 1.0));
         final s = cell * (0.16 + 0.22 * glint);
         canvas.drawRRect(
           RRect.fromRectAndRadius(

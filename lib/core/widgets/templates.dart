@@ -30,12 +30,12 @@ class StatementSlideWidget extends FlutterDeckSlideWidget {
     this.mood = GradientMood.hero,
     this.gradient,
   }) : super(
-          configuration: FlutterDeckSlideConfiguration(
-            route: route,
-            title: statement,
-            header: _noHeader,
-          ),
-        );
+         configuration: FlutterDeckSlideConfiguration(
+           route: route,
+           title: statement,
+           header: _noHeader,
+         ),
+       );
 
   final String statement;
   final String? subtitle;
@@ -70,12 +70,12 @@ class DividerSlideWidget extends FlutterDeckSlideWidget {
     this.mood = GradientMood.violet,
     this.accent = DeckColors.cyan,
   }) : super(
-          configuration: FlutterDeckSlideConfiguration(
-            route: route,
-            title: '$number  $title',
-            header: _noHeader,
-          ),
-        );
+         configuration: FlutterDeckSlideConfiguration(
+           route: route,
+           title: '$number  $title',
+           header: _noHeader,
+         ),
+       );
 
   final String number;
   final String label;
@@ -114,13 +114,13 @@ class BulletSlideWidget extends FlutterDeckSlideWidget {
     this.reveal = true,
     this.side,
   }) : super(
-          configuration: FlutterDeckSlideConfiguration(
-            route: route,
-            title: title,
-            header: _noHeader,
-            steps: reveal ? bullets.length : 1,
-          ),
-        );
+         configuration: FlutterDeckSlideConfiguration(
+           route: route,
+           title: title,
+           header: _noHeader,
+           steps: reveal ? bullets.length : 1,
+         ),
+       );
 
   final String title;
   final List<String> bullets;
@@ -150,7 +150,12 @@ class BulletSlideWidget extends FlutterDeckSlideWidget {
             mood: mood,
             child: side == null
                 ? list
-                : SplitContent(left: list, right: side!, leftFlex: 5, rightFlex: 5),
+                : SplitContent(
+                    left: list,
+                    right: side!,
+                    leftFlex: 5,
+                    rightFlex: 5,
+                  ),
           );
         },
       ),
@@ -188,13 +193,13 @@ class CardGridSlideWidget extends FlutterDeckSlideWidget {
     this.mood = GradientMood.cool,
     this.reveal = true,
   }) : super(
-          configuration: FlutterDeckSlideConfiguration(
-            route: route,
-            title: title,
-            header: _noHeader,
-            steps: reveal ? cards.length : 1,
-          ),
-        );
+         configuration: FlutterDeckSlideConfiguration(
+           route: route,
+           title: title,
+           header: _noHeader,
+           steps: reveal ? cards.length : 1,
+         ),
+       );
 
   final String title;
   final List<CardSpec> cards;
@@ -255,13 +260,13 @@ class CodeSlideWidget extends FlutterDeckSlideWidget {
     this.fontSize = 20,
     this.mood = GradientMood.calm,
   }) : super(
-          configuration: FlutterDeckSlideConfiguration(
-            route: route,
-            title: title,
-            header: _noHeader,
-            steps: points.isEmpty ? 1 : points.length,
-          ),
-        );
+         configuration: FlutterDeckSlideConfiguration(
+           route: route,
+           title: title,
+           header: _noHeader,
+           steps: points.isEmpty ? 1 : points.length,
+         ),
+       );
 
   final String title;
   final String code;
@@ -333,13 +338,13 @@ class QuizSlideWidget extends FlutterDeckSlideWidget {
     this.explanation,
     this.eyebrow = 'QUIZ',
   }) : super(
-          configuration: FlutterDeckSlideConfiguration(
-            route: route,
-            title: 'クイズ：$question',
-            header: _noHeader,
-            steps: 2,
-          ),
-        );
+         configuration: FlutterDeckSlideConfiguration(
+           route: route,
+           title: 'クイズ：$question',
+           header: _noHeader,
+           steps: 2,
+         ),
+       );
 
   final String question;
   final List<String> options;
@@ -411,7 +416,11 @@ class _QuizState extends State<_Quiz> {
             children: [
               Row(
                 children: [
-                  const Pill('🙋 会場に質問', color: DeckColors.orange, fontSize: 18),
+                  const Pill(
+                    '🙋 会場に質問',
+                    color: DeckColors.orange,
+                    fontSize: 18,
+                  ),
                   const SizedBox(width: 18),
                   Text(widget.eyebrow, style: DeckText.eyebrow),
                   const Spacer(),
@@ -440,8 +449,8 @@ class _QuizState extends State<_Quiz> {
                           state: !widget.revealed
                               ? _OptionState.open
                               : i == widget.answer
-                                  ? _OptionState.correct
-                                  : _OptionState.wrong,
+                              ? _OptionState.correct
+                              : _OptionState.wrong,
                           onTap: () => setState(() => _votes[i]++),
                         ),
                       ),
@@ -451,7 +460,10 @@ class _QuizState extends State<_Quiz> {
               AnimatedOpacity(
                 opacity: widget.revealed && widget.explanation != null ? 1 : 0,
                 duration: const Duration(milliseconds: 400),
-                child: Footnote(widget.explanation ?? '', color: DeckColors.green),
+                child: Footnote(
+                  widget.explanation ?? '',
+                  color: DeckColors.green,
+                ),
               ),
             ],
           ),
@@ -503,7 +515,9 @@ class _QuizOption extends StatelessWidget {
               color: Colors.white.withValues(alpha: 0.04),
               borderRadius: BorderRadius.circular(22),
               border: Border.all(
-                color: c.withValues(alpha: state == _OptionState.correct ? 1 : 0.45),
+                color: c.withValues(
+                  alpha: state == _OptionState.correct ? 1 : 0.45,
+                ),
                 width: state == _OptionState.correct ? 3 : 1.5,
               ),
             ),
@@ -521,49 +535,54 @@ class _QuizOption extends StatelessWidget {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 28),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 52,
-                        height: 52,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: c.withValues(alpha: 0.2),
-                          shape: BoxShape.circle,
-                          border: Border.all(color: c, width: 2),
-                        ),
-                        child: Text(
-                          letter,
-                          style: DeckText.heading.copyWith(
-                            fontSize: 26,
-                            color: c,
-                            height: 1,
+                Positioned.fill(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 28),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 52,
+                          height: 52,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: c.withValues(alpha: 0.2),
+                            shape: BoxShape.circle,
+                            border: Border.all(color: c, width: 2),
+                          ),
+                          child: Text(
+                            letter,
+                            style: DeckText.heading.copyWith(
+                              fontSize: 26,
+                              color: c,
+                              height: 1,
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(width: 26),
-                      Expanded(
-                        child: Text(
-                          text,
-                          style: DeckText.heading.copyWith(fontSize: 34),
+                        const SizedBox(width: 26),
+                        Expanded(
+                          child: Text(
+                            text,
+                            style: DeckText.heading.copyWith(fontSize: 34),
+                          ),
                         ),
-                      ),
-                      if (votes > 0)
-                        Text(
-                          '$votes 票',
-                          style: DeckText.body.copyWith(color: c, fontSize: 26),
-                        ),
-                      if (state == _OptionState.correct) ...[
-                        const SizedBox(width: 18),
-                        const Icon(
-                          Icons.check_circle_rounded,
-                          color: DeckColors.green,
-                          size: 44,
-                        ),
+                        if (votes > 0)
+                          Text(
+                            '$votes 票',
+                            style: DeckText.body.copyWith(
+                              color: c,
+                              fontSize: 26,
+                            ),
+                          ),
+                        if (state == _OptionState.correct) ...[
+                          const SizedBox(width: 18),
+                          const Icon(
+                            Icons.check_circle_rounded,
+                            color: DeckColors.green,
+                            size: 44,
+                          ),
+                        ],
                       ],
-                    ],
+                    ),
                   ),
                 ),
               ],
@@ -590,13 +609,13 @@ class InteractiveSlideWidget extends FlutterDeckSlideWidget {
     this.intensity = 0.5,
     int steps = 1,
   }) : super(
-          configuration: FlutterDeckSlideConfiguration(
-            route: route,
-            title: title,
-            header: _noHeader,
-            steps: steps,
-          ),
-        );
+         configuration: FlutterDeckSlideConfiguration(
+           route: route,
+           title: title,
+           header: _noHeader,
+           steps: steps,
+         ),
+       );
 
   final String title;
   final String? eyebrow;

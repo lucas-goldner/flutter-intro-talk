@@ -5,24 +5,20 @@ import 'package:rive/rive.dart';
 
 class S02Speaker extends FlutterDeckSlideWidget {
   const S02Speaker({super.key})
-      : super(
-          configuration: const FlutterDeckSlideConfiguration(
-            route: '/speaker',
-            header: FlutterDeckHeaderConfiguration(
-              title: '自己紹介',
-            ),
-            steps:
-                8, // 8 steps: 1) 10x, 2) bark, 3) 1x, 4) profile image, 5) age/nationality, 6) GDE, 7) Flutter Tokyo, 8) YOUTRUST
-          ),
-        );
+    : super(
+        configuration: const FlutterDeckSlideConfiguration(
+          route: '/speaker',
+          header: FlutterDeckHeaderConfiguration(title: '自己紹介'),
+          steps:
+              8, // 8 steps: 1) 10x, 2) bark, 3) 1x, 4) profile image, 5) age/nationality, 6) GDE, 7) Flutter Tokyo, 8) YOUTRUST
+        ),
+      );
 
   @override
   FlutterDeckSlide build(BuildContext context) {
     return FlutterDeckSlide.custom(
       builder: (context) {
-        return const SizedBox.expand(
-          child: _SpeakerRiveWidget(),
-        );
+        return const SizedBox.expand(child: _SpeakerRiveWidget());
       },
     );
   }
@@ -80,10 +76,13 @@ class _SpeakerRiveWidgetState extends State<_SpeakerRiveWidget> {
 
   Future<void> _loadRiveFile() async {
     try {
-      final bytes = await DefaultAssetBundle.of(context)
-          .load('assets/lucas_goldner_presentation.riv');
-      final file = await File.decode(bytes.buffer.asUint8List(),
-          riveFactory: Factory.rive);
+      final bytes = await DefaultAssetBundle.of(
+        context,
+      ).load('assets/lucas_goldner_presentation.riv');
+      final file = await File.decode(
+        bytes.buffer.asUint8List(),
+        riveFactory: Factory.rive,
+      );
 
       if (file != null) {
         _file = file;
@@ -122,10 +121,7 @@ class _SpeakerRiveWidgetState extends State<_SpeakerRiveWidget> {
       child: Stack(
         children: [
           // Rive animation background
-          RiveWidget(
-            controller: _controller!,
-            fit: Fit.cover,
-          ),
+          RiveWidget(controller: _controller!, fit: Fit.cover),
           // Profile information overlay - shows after Rive animations (step 4+)
           _ProfileOverlay(currentStep: _currentStep),
         ],
@@ -205,10 +201,7 @@ class _ProfileOverlay extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  Text(
-                    '🇩🇪 🇧🇷',
-                    style: TextStyle(fontSize: 30),
-                  ),
+                  Text('🇩🇪 🇧🇷', style: TextStyle(fontSize: 30)),
                 ],
               ),
             ),

@@ -6,10 +6,5 @@ abstract final class ShaderAssets {
   static const chaosButton = 'shaders/chaos_button.frag';
   static const musicBackground = 'shaders/music_background.frag';
 
-  static const all = [
-    titleAurora,
-    galaxyButton,
-    chaosButton,
-    musicBackground,
-  ];
+  static const all = [titleAurora, galaxyButton, chaosButton, musicBackground];
 }

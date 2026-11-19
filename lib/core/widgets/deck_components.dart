@@ -125,11 +125,7 @@ class Pill extends StatelessWidget {
 
 /// A horizontal row of boxes joined by arrows — the deck's flow diagram.
 class FlowRow extends StatelessWidget {
-  const FlowRow({
-    required this.steps,
-    super.key,
-    this.currentStep,
-  });
+  const FlowRow({required this.steps, super.key, this.currentStep});
 
   final List<FlowStep> steps;
 
