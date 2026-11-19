@@ -22,7 +22,7 @@ final List<FlutterDeckSlideWidget> counterSlides = [
     number: '02',
     label: 'Counter App',
     title: 'カウンターアプリで学ぶ',
-    subtitle: 'flutter create が最初にくれる、70行のアプリ',
+    subtitle: 'flutter create が最初にくれる、66行のアプリ',
     accent: DeckColors.dart,
   ),
   InteractiveSlideWidget(
