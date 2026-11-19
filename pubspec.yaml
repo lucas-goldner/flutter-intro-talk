@@ -37,3 +37,6 @@ flutter:
     - shaders/galaxy_button.frag
     - shaders/chaos_button.frag
     - shaders/music_background.frag
+    - shaders/scene_3d.frag
+    - shaders/warp_portal.frag
+    - shaders/hello_gradient.frag
