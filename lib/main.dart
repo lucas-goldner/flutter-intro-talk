@@ -99,8 +99,17 @@ class FlutterIntroDeck extends StatelessWidget {
   }
 }
 
+/// Routes to leave out for the 90-minute cut — see 「時間配分」 in
+/// SPEAKER_NOTES.md for the suggested candidates. Empty = the full deck.
+const Set<String> kSkippedRoutes = {};
+
 /// The deck, in presentation order.
 List<FlutterDeckSlideWidget> deckSlides() => [
+      for (final slide in _allSlides())
+        if (!kSkippedRoutes.contains(slide.configuration!.route)) slide,
+    ];
+
+List<FlutterDeckSlideWidget> _allSlides() => [
   // ── 00 · 問題提起 → Flutter の紹介 ─────────────────────────────
   ...titleAndProblemSlides,
   // ── 自己紹介 ───────────────────────────────────────────────────
