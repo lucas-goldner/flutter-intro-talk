@@ -11,6 +11,41 @@
 
 > **発表前チェック**: 全スライドを一度通して、シェーダーと Rive を温めておく。
 
+## 時間配分 / Timing
+
+全スライドを通すと **約112分**（各章見出しの目安の合計）。90分に収めるには、下の候補をナビゲーションドロワー（`⌘ + ⌃ + .`）で飛ばすか、
+`lib/main.dart` の該当スライドに `hidden: true` を付けてください。候補を全部飛ばすと **約28分短く** なります。
+
+| # | スライド | ルート | 節約 |
+| --- | --- | --- | --- |
+| 10 | Flutter の歩み | `/p-history` | 約1.5分 |
+| 6 | 何が起きるか | `/p-costs` | 約1分 |
+| 18 | 開発体験 | `/b-devex` | 約1分 |
+| 23 | 継承ではなく、組み合わせ | `/b-composition` | 約1分 |
+| 29 | Code walk 1：main → runApp → MaterialApp | `/c-walk-main` | 約1分 |
+| 39 | Key | `/t-keys` | 約2分 |
+| 42 | ヒットテスト | `/j-hittest` | 約1分 |
+| 43 | setState の中身 | `/j-setstate` | 約1分 |
+| 48 | InheritedWidget | `/w-inherited` | 約1分 |
+| 49 | Widget の家系図 | `/w-family` | 約1.5分 |
+| 53 | 深い Widget に値を届けるには… | `/s-prop-drilling-code` | 約1分 |
+| 59 | クイズ：onPressed の中で使うのは？ | `/s-quiz-watch-read` | 約1.5分 |
+| 62 | Event の流れと State の流れ | `/s-bloc-stream` | 約2分 |
+| 66 | ディレクトリ構成 | `/a-directories` | 約1分 |
+| 68 | ApiClient | `/a-api-client` | 約1分 |
+| 73 | overrides で、層ごと差し替える | `/a-overrides` | 約1分 |
+| 77 | Impeller | `/r-impeller` | 約1.5分 |
+| 85 | フラグメントシェーダーの使い方 | `/x-shader-howto` | 約1.5分 |
+| 87 | アニメーションも、Widget を変えるだけ | `/x-animations` | 約2分 |
+| 93 | 逆向きもできる | `/n-add-to-app` | 約1分 |
+| 97 | Pigeon | `/n-pigeon` | 約1分 |
+| 110 | Golden テスト | `/q-golden` | 約1分 |
+| 124 | 出典 | `/m-sources` | 約0.5分 |
+
+> 優先して残すもの: 2チーム問題 → Flutter とは → 自己紹介 → カウンターアプリ → 3つのツリー → **信号のチューブ** → Riverpod のライブデモ → アーキテクチャのライブアプリ → 3D シーン → MethodChannel / FFIgen → GenUI シミュレーター → ギャラリー。
+
+---
+
 ## Opening — 問題提起から Flutter へ（約12分）
 
 ### 1. タイトル `/p-title` — 1ステップ
