@@ -214,7 +214,7 @@ class _ClosingSlideContentState extends State<_ClosingSlideContent>
               child: Opacity(
                 opacity: 0.35,
                 child: Text(
-                  'FLUTTERKAIGI 2026',
+                  'はじめての FLUTTER',
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w700,
