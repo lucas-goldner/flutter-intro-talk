@@ -108,13 +108,6 @@ final List<FlutterDeckSlideWidget> agendaAndBenefitsSlides = [
       ),
     ],
   ),
-  QuizSlideWidget(
-    route: '/b-quiz-language',
-    question: 'Flutter の UI は、何という言語で書く？',
-    options: const ['Kotlin', 'Dart', 'JavaScript', 'Swift'],
-    answer: 1,
-    explanation: 'Dart。UI もロジックも、iOS も Android も、ぜんぶ同じ Dart で書きます。',
-  ),
   StatementSlideWidget(
     route: '/b-everything-widget',
     eyebrow: 'Everything is a Widget',
