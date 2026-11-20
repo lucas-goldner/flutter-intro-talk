@@ -54,7 +54,7 @@ flutter test test/render_slides_test.dart --plain-name s05 # build/shots/ に PN
 | 自己紹介 | `speaker_slide.dart` | Rive（シェーダートークと同じ） |
 | 01 なぜ Flutter？ | `s02_benefits.dart` | 6プラットフォーム切り替え、Widget X-ray、レイアウトプレイグラウンド |
 | 02 カウンターアプリ | `s03_counter.dart` | 本物のカウンター + テンプレートコード、setState on/off |
-| 03 3つのツリー | `s04_trees.dart` | 3ツリーエクスプローラー、リビルド可視化、Key の入れ替え |
+| 03 3つのツリー | `s04_trees.dart` | 3ツリーエクスプローラー、リビルド可視化 |
 | タップの旅 | `s05_touch_journey.dart` | **信号のチューブ**（hitTest → setState → build → layout → paint → 画素）、フレーム予算 |
 | 04 Widget の種類 | `s06_widget_types.dart` | ライフサイクルロガー、Material ⇄ Cupertino（.adaptive） |
 | 05 状態管理 | `s07_state.dart` | Prop drilling vs InheritedWidget、Riverpod のリビルド数、BLoC ストリーム |
