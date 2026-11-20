@@ -1010,7 +1010,7 @@ class _BlocStreamState extends State<_BlocStream>
     with SingleTickerProviderStateMixin {
   static const _travel = Duration(milliseconds: 900);
 
-  late final Ticker _ticker = createTicker(_onTick)..start();
+  late final Ticker _ticker = createTicker(_onTick);
   Duration _now = Duration.zero;
   final _tokens = <_Token>[];
 
@@ -1019,6 +1019,13 @@ class _BlocStreamState extends State<_BlocStream>
   Duration _blocPulse = const Duration(seconds: -10);
   Duration _uiPulse = const Duration(seconds: -10);
   final _history = <int>[0];
+
+  @override
+  void initState() {
+    super.initState();
+    // Start explicitly: a `late` field is only created on first access.
+    _ticker.start();
+  }
 
   void _onTick(Duration elapsed) {
     _now = elapsed;

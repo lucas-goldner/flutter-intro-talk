@@ -104,6 +104,14 @@ void markNeedsBuild() {
     steps: 1,
     intensity: 0.4,
   ),
+  // Halfway point (~45 min): the basics are done — open the floor.
+  StatementSlideWidget(
+    route: '/j-questions',
+    eyebrow: 'Q&A · 質問タイム',
+    statement: 'ここまでで、\n質問ありますか？',
+    subtitle: 'Widget・3つのツリー・setState・1フレーム。どんな小さなことでも OK 🙋',
+    mood: GradientMood.warm,
+  ),
 ];
 
 // ── The tube ────────────────────────────────────────────────────────────────
@@ -908,11 +916,18 @@ class _FrameBudgetDemo extends StatefulWidget {
 
 class _FrameBudgetDemoState extends State<_FrameBudgetDemo>
     with SingleTickerProviderStateMixin {
-  late final Ticker _ticker = createTicker(_tick)..start();
+  late final Ticker _ticker = createTicker(_tick);
   final _frames = <double>[];
   Duration _last = Duration.zero;
   Duration _now = Duration.zero;
   double _workMs = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    // Start explicitly: a `late` field is only created on first access.
+    _ticker.start();
+  }
 
   void _tick(Duration elapsed) {
     final dt = (elapsed - _last).inMicroseconds / 1000;
