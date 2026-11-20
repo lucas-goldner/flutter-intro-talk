@@ -152,17 +152,6 @@ final List<FlutterDeckSlideWidget> stateSlides = [
     footnote: 'select を使うと「レベルが変わった時」だけ rebuild される。',
     builder: _riverpodLiveDemo,
   ),
-  QuizSlideWidget(
-    route: '/s-quiz-watch-read',
-    question: 'ボタンの onPressed の中で使うのは？',
-    options: const [
-      'ref.watch(counterProvider)',
-      'ref.read(counterProvider.notifier)',
-      'どちらでも同じ',
-    ],
-    answer: 1,
-    explanation: 'watch は build の中で「購読」する。read はイベントの中で「今の値を一度だけ」読む。',
-  ),
   CodeSlideWidget(
     route: '/s-async-value',
     eyebrow: 'AsyncNotifier / AsyncValue',
