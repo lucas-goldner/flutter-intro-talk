@@ -20,7 +20,7 @@ import 'package:flutter_intro_talk/demo_app/layer_trace.dart';
 final List<FlutterDeckSlideWidget> architectureSlides = [
   DividerSlideWidget(
     route: '/a-divider',
-    number: '06',
+    number: '07',
     label: 'Architecture',
     title: 'アプリの設計',
     subtitle: '実際のアプリは、どう分ける？',

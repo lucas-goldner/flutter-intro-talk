@@ -17,7 +17,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final List<FlutterDeckSlideWidget> stateSlides = [
   DividerSlideWidget(
     route: '/s-divider',
-    number: '05',
+    number: '06',
     label: 'State management',
     title: '状態管理',
     subtitle: '「その値、誰が持って、誰に届ける？」',

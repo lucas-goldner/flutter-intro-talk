@@ -56,10 +56,11 @@ flutter test test/render_slides_test.dart --plain-name s05 # build/shots/ に PN
 | 02 カウンターアプリ | `s03_counter.dart` | 本物のカウンター + テンプレートコード、setState on/off |
 | 03 3つのツリー | `s04_trees.dart` | 3ツリーエクスプローラー、リビルド可視化 |
 | タップの旅 | `s05_touch_journey.dart` | **信号のチューブ**（hitTest → setState → build → layout → paint → 画素）、フレーム予算 |
-| 04 Widget の種類 | `s06_widget_types.dart` | ライフサイクルロガー、Widget の家系図 |
-| 05 状態管理 | `s07_state.dart` | Prop drilling vs InheritedWidget、Riverpod のリビルド数、BLoC ストリーム |
-| 06 アプリの設計 | `s08_architecture.dart` + `lib/demo_app/` | Screen → ViewModel → Repository → ApiClient が実際に動くアプリ |
-| 07 描画の仕組み | `s09_rendering.dart` | フレームワーク比較、Skia vs Impeller、ブランドデザインの一貫性 |
+| 04 描画の仕組み | `s09_rendering.dart` | フレームワーク比較、Skia vs Impeller、ブランドデザインの一貫性 |
+| 質問タイム | `s05_touch_journey.dart` | 前半の区切り（`questionTimeSlides`） |
+| 05 Widget の種類 | `s06_widget_types.dart` | ライフサイクルロガー、Widget の家系図 |
+| 06 状態管理 | `s07_state.dart` | Prop drilling vs InheritedWidget、Riverpod のリビルド数、BLoC ストリーム |
+| 07 アプリの設計 | `s08_architecture.dart` + `lib/demo_app/` | Screen → ViewModel → Repository → ApiClient が実際に動くアプリ |
 | 何でも描ける | `s10_beyond.dart` | レイマーチングの 3D シーン、ワープポータル、シェーダー UI、アニメーション |
 | 弱点とネイティブ連携 | `s11_native.dart` | Platform Views のレイヤー分解、MethodChannel シミュレーター、FFIgen |
 | 08 AI | `s12_ai.dart` | エージェントループ、アプリ内チャット |

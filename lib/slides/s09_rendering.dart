@@ -16,7 +16,7 @@ import 'package:flutter_intro_talk/core/widgets/wwdc_background.dart';
 final List<FlutterDeckSlideWidget> renderingSlides = [
   DividerSlideWidget(
     route: '/r-divider',
-    number: '07',
+    number: '04',
     label: 'Rendering',
     title: 'Flutter はどう描画するのか',
     subtitle: 'OS の部品を借りるか、全部自分で描くか。',

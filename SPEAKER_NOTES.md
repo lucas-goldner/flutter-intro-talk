@@ -13,26 +13,26 @@
 
 ## 時間配分 / Timing
 
-全スライドを通すと **約112分**（各章見出しの目安の合計）。90分に収めるには、下の候補をナビゲーションドロワー（`⌘ + ⌃ + .`）で飛ばすか、
+全スライドを通すと **約114分**（各章見出しの目安の合計）。90分に収めるには、下の候補をナビゲーションドロワー（`⌘ + ⌃ + .`）で飛ばすか、
 `lib/main.dart` の `kSkippedRoutes` にルートを追加してください。候補を全部飛ばすと **約24分短く** なります。
 
 | # | スライド | ルート | 節約 |
 | --- | --- | --- | --- |
-| 10 | Flutter の歩み | `/p-history` | 約1.5分 |
 | 6 | 何が起きるか | `/p-costs` | 約1分 |
+| 10 | Flutter の歩み | `/p-history` | 約1.5分 |
 | 18 | 開発体験 | `/b-devex` | 約1分 |
 | 22 | 継承ではなく、組み合わせ | `/b-composition` | 約1分 |
 | 28 | Code walk 1：main → runApp → MaterialApp | `/c-walk-main` | 約1分 |
 | 40 | ヒットテスト | `/j-hittest` | 約1分 |
 | 41 | setState の中身 | `/j-setstate` | 約1分 |
-| 47 | InheritedWidget | `/w-inherited` | 約1分 |
-| 48 | Widget の家系図 | `/w-family` | 約1.5分 |
-| 51 | 深い Widget に値を届けるには… | `/s-prop-drilling-code` | 約1分 |
-| 60 | Event の流れと State の流れ | `/s-bloc-stream` | 約2分 |
-| 64 | ディレクトリ構成 | `/a-directories` | 約1分 |
-| 66 | ApiClient | `/a-api-client` | 約1分 |
-| 71 | overrides で、層ごと差し替える | `/a-overrides` | 約1分 |
-| 75 | Impeller | `/r-impeller` | 約1.5分 |
+| 46 | Impeller | `/r-impeller` | 約1.5分 |
+| 54 | InheritedWidget | `/w-inherited` | 約1分 |
+| 55 | Widget の家系図 | `/w-family` | 約1.5分 |
+| 58 | 深い Widget に値を届けるには… | `/s-prop-drilling-code` | 約1分 |
+| 67 | Event の流れと State の流れ | `/s-bloc-stream` | 約2分 |
+| 71 | ディレクトリ構成 | `/a-directories` | 約1分 |
+| 73 | ApiClient | `/a-api-client` | 約1分 |
+| 78 | overrides で、層ごと差し替える | `/a-overrides` | 約1分 |
 | 83 | フラグメントシェーダーの使い方 | `/x-shader-howto` | 約1.5分 |
 | 85 | アニメーションも、Widget を変えるだけ | `/x-animations` | 約2分 |
 | 91 | 逆向きもできる | `/n-add-to-app` | 約1分 |
@@ -322,7 +322,7 @@
 
 ---
 
-## 02 カウンターアプリ 〜 04 Widget の種類（約25分）
+## 02 カウンターアプリ 〜 03 3つのツリー・タップの旅（約20分）
 
 > **🖱 デモの操作**: マウスで触れるスライドには *🖱* を付けています。
 > `/j-tube` は → で1段ずつ進めても、スマホの ＋ をタップして自動再生してもOK。
@@ -512,332 +512,17 @@
 
 ---
 
-### 43. 質問タイム `/j-questions` — 1ステップ
+## 04 — Flutter はどう描画するのか（約6分）
+
+### 43. 扉：Flutter はどう描画するのか `/r-divider` — 1ステップ
 
 **JP**
-> ここでちょうど前半が終わりです。Widget、3つのツリー、setState、1フレームの流れまで来ました。
-> ここまでで質問ありますか？ どんな小さなことでも大丈夫です。
-> （手が挙がらなければ）たとえば「StatelessWidget と StatefulWidget はどう使い分ける？」とかでも OK です。
-
-*質問が出なければ 30 秒で切り上げて次へ。後半は Widget の種類と状態管理から。*
+> タップの旅の最後は「エンジンがラスタライズして、画面に 1 が出る」でした。
+> では、その画素は誰が描いているのか。ここが Flutter のいちばんユニークなところです。
 
 ---
 
-### 44. 扉：Widget の種類 `/w-divider` — 1ステップ
-
-**JP**
-> 中身が分かったところで、Widget の種類を整理しましょう。
-
----
-
-### 45. StatelessWidget と StatefulWidget `/w-stateless-stateful` — 1ステップ
-
-**JP**
-> 左が StatelessWidget。外から渡された値だけで見た目が決まります。
-> 右が StatefulWidget。自分で覚えておく値、State を持っています。
-> 下のハートは本物です。押すと setState で切り替わります。
-> 迷ったら Stateless から。状態が必要になったら Stateful に。
-
-*🖱 ハートをタップ。*
-
----
-
-### 46. State の一生 `/w-lifecycle` — 1ステップ
-
-**JP**
-> State には一生があります。右のログに、呼ばれたメソッドがリアルタイムで出ます。
-> 最初に createState、initState、didChangeDependencies、build。
-> setState を押すと、build だけ。props、つまり親から渡す値を変えると didUpdateWidget → build。
-> 上の InheritedWidget を変えると didChangeDependencies。
-> アンマウントすると deactivate → dispose。後片付けは dispose で。
-
-*🖱 setState → props を変える → InheritedWidget を変える → アンマウント → マウント の順に押す。*
-
----
-
-### 47. InheritedWidget `/w-inherited` — 3ステップ
-
-**JP**
-> ⏎ InheritedWidget は、ツリーの上に置いておくと、下のどこからでも値を取れる仕組み。
-> ⏎ `dependOnInheritedWidgetOfExactType` で依存すると、値が変わったときにその Widget だけが再ビルドされます。
-> ⏎ 毎日使っている `Theme.of(context)` や `MediaQuery.of(context)` も、この仕組みです。後半の状態管理の話の土台になります。
-
----
-
-### 48. Widget の家系図 `/w-family` — 4ステップ
-
-**JP**
-> ⏎ StatelessWidget：組み立てるだけ。
-> ⏎ StatefulWidget：状態を持つ。
-> ⏎ RenderObjectWidget：実際に描いたり並べたりする。子が0個・1個・複数で3種類。Padding も Row も、ここです。
-> ⏎ ProxyWidget：情報を渡す。InheritedWidget や、Expanded・Positioned のような親にレイアウト情報を伝える ParentDataWidget。
-> 画面に何かを描くのは RenderObjectWidget だけ。ほかは組み立て役と橋渡し役です。
-
----
-
-## 05 — 状態管理（約12分）
-
-### 49. 扉 `/s-divider` — 1ステップ
-
-**JP**
-> ここからは状態管理です。「その値、誰が持って、誰に届けるのか」。Flutter で一番議論になるテーマです。
-
----
-
-### 50. 状態には2種類ある `/s-kinds` — 2ステップ
-
-**JP**
-> 状態には大きく2種類あります。
-> ⏎ 1つめは Ephemeral state。TextField に入力中の文字や、選択中のタブのように、1つの Widget の中だけで完結するもの。これは setState で十分です。
-> ⏎ 2つめは App state。ログイン中のユーザー、カート、お気に入り、設定。アプリのあちこちで共有するもの。悩むのはこっちです。
-
----
-
-### 51. 深い Widget に値を届けるには… `/s-prop-drilling-code` — 3ステップ
-
-**JP**
-> setState だけで App state を扱おうとすると、どうなるか。
-> ⏎ 状態は一番上の State に置くしかありません。
-> ⏎ そして途中の Widget は、自分では使わないのに、子に渡すためだけに受け取ります。HomePage は color を使わないのに、引数に持っている。
-> ⏎ これを Prop drilling と呼びます。Body、Section、Card…と、どこまでも続きます。
-
----
-
-### 52. 値はどこを通って届く？ `/s-prop-drilling-demo` — 1ステップ 🖱
-
-**JP**
-> 実際に見てみましょう。色を使っているのは Title と ThemedButton の2つだけです。
-> まず「setState ＋ 引数」で「テーマを変える」を押します。
-> ……値が上から1段ずつ降りていって、途中の Widget が全部 rebuild されました。9個です。
-> 今度は InheritedWidget に切り替えて、もう一度押します。
-> ……App から、使っている2つにだけ直接届きました。rebuild は2個だけ。
-
-*🖱 左上の「渡し方」を切り替えて、それぞれ「テーマを変える」を1〜2回押す。rebuild の数字を指さす。*
-
----
-
-### 53. ツリーの上から、直接届ける `/s-inherited-widget` — 4ステップ
-
-**JP**
-> これが InheritedWidget です。
-> ⏎ ツリーの上に「置いておく」だけ。
-> ⏎ 下のどこからでも of(context) で取り出せます。
-> ⏎ dependOnInheritedWidgetOfExactType で取得した Widget は「依存している」と登録されて、updateShouldNotify が true のときだけ rebuild されます。
-> ⏎ 実は Theme.of(context) も MediaQuery.of(context) も、中身はこれです。皆さんもう毎日使っています。
-
----
-
-### 54. 標準でも十分。でも… `/s-when-package` — 3ステップ
-
-**JP**
-> ここまで見てきたように、Flutter 標準の setState と InheritedWidget だけでも、ちゃんとアプリは作れます。
-> ⏎ 小さなアプリや個人開発、プロトタイプなら、これで十分。仕組みを理解するにも一番いいです。
-> ⏎ ただ正直に言うと、会社で何人ものエンジニアが触る大きなアプリになると話が変わります。画面も人も増えて、「状態をどこに置くか」のルールが必要になる。API の非同期やエラーも整理したいし、テストで差し替えもしたい。
-> ⏎ なので実際のプロジェクトでは、Riverpod や BLoC のような状態管理パッケージを使うことがほとんどです。今日は Riverpod を中心に見ていきます。
-
----
-
-### 55. そこで Riverpod `/s-why-riverpod` — 6ステップ
-
-**JP**
-> まず Riverpod。InheritedWidget を使いやすくしたのが Provider パッケージで、同じ作者による次の世代が Riverpod です。
-> ⏎ コンパイル時に安全。Provider が見つからない、という実行時エラーが起きません。
-> ⏎ BuildContext がいらない。Widget の外からでも状態を読めます。
-> ⏎ テストで差し替えが簡単。
-> ⏎ 誰も見ていない状態は自動で破棄されます。
-> ⏎ 非同期が標準で、loading・error・data を AsyncValue で表します。
-> ⏎ そして select で、必要な部分の変化だけを購読できます。
-
----
-
-### 56. Notifier ＋ Provider ＋ ref `/s-riverpod-basics` — 4ステップ
-
-**JP**
-> 基本の形です。
-> ⏎ Notifier が状態とロジックを持ちます。build() が初期値、increment で state を更新。
-> ⏎ Provider はグローバルに宣言します。グローバルですが、状態自体は ProviderScope の中に閉じています。
-> ⏎ Widget 側は ConsumerWidget にして、build の中で ref.watch。値が変わると rebuild されます。
-> ⏎ ボタンを押したときのようなイベントの中では ref.read を使います。
-
----
-
-### 57. rebuild されるのは、見ている Widget だけ `/s-riverpod-live` — 1ステップ 🖱
-
-**JP**
-> これは本物の Riverpod が動いています。カードの下の数字は、それぞれの build() が何回呼ばれたかです。
-> 右の +1 を押します。……左の watch しているカードだけが光って、build 回数が増えます。
-> 押している右のボタン自身は read しかしていないので、1のまま。
-> 真ん中は select で「5で割った値」だけを見ているので、5回に1回しか rebuild されません。
-
-*🖱 +1 を5回以上押す。5回目で真ん中のカードが光るのを見せる。*
-
----
-
-### 58. 非同期の3状態を、型で網羅 `/s-async-value` — 3ステップ
-
-**JP**
-> 実際のアプリはほとんど非同期です。
-> ⏎ AsyncNotifier なら、build() が Future を返すだけ。
-> ⏎ 読み込み中・エラー・成功の3状態は Riverpod が AsyncValue として管理してくれます。
-> ⏎ AsyncValue は sealed class なので、switch で書けば漏れがあるとコンパイラが教えてくれます。
-
----
-
-### 59. イベントを入れて、状態を受け取る `/s-bloc-code` — 4ステップ
-
-**JP**
-> もう1つの人気の選択肢が BLoC です。
-> ⏎ UI は Event を add するだけ。
-> ⏎ Bloc が on<Event> で Event を State に変換して emit します。
-> ⏎ UI は BlocBuilder で State を受け取って描きます。
-> ⏎ 書く量は増えますが、ルールがはっきりしているので大規模なチームで人気です。
-
----
-
-### 60. Event の流れと State の流れ `/s-bloc-stream` — 1ステップ 🖱
-
-**JP**
-> 流れを見てみましょう。左のボタンで Event を投げます。
-> ……Event が Stream を通って Bloc に入り、新しい State が別の Stream で UI に届きます。
-> 連打しても、1つずつ順番に処理されます。流れが一方向なので、デバッグしやすいんです。
-
-*🖱 add(Incremented()) を数回、Reset を1回。右下の「受け取った State」の履歴を指さす。*
-
----
-
-### 61. 状態管理の比較 `/s-comparison` — 1ステップ
-
-**JP**
-> まとめるとこうなります。正解は1つではありません。
-> Widget の中だけなら setState。アプリで共有するなら Riverpod か BLoC。
-> 迷ったら、まずは setState で小さく始めて、共有が必要になったら Riverpod、がおすすめです。チームの慣れも大事な判断材料です。
-
----
-
-## 06 — アプリの設計（約10分）
-
-### 62. 扉 `/a-divider` — 1ステップ
-
-**JP**
-> 状態管理がわかったところで、実際のアプリをどう分けて作るかを見ていきます。
-
----
-
-### 63. 4つの層に分ける `/a-layers` — 4ステップ
-
-**JP**
-> Flutter 公式のアーキテクチャガイドに沿った、よくある分け方です。大きく UI layer と Data layer。
-> ⏎ Screen は状態を描くだけ。ボタンが押されたら ViewModel に伝えます。
-> ⏎ ViewModel は画面の状態を持って、操作をロジックに変えます。Riverpod の Notifier がここです。
-> ⏎ Repository はデータの唯一の窓口。JSON を Model に変換します。
-> ⏎ ApiClient は HTTP と JSON だけを知っています。
-> 呼び出しは上から下へ、データは下から上へ。下の層は上の層を知りません。
-
----
-
-### 64. ディレクトリ構成 `/a-directories` — 4ステップ
-
-**JP**
-> フォルダはこう分けます。
-> ⏎ ui/ の下は画面ごと。Screen と ViewModel を並べます。
-> ⏎ data/ は画面をまたいで共有するもの。
-> ⏎ domain/ にはただのモデルを置きます。
-> ⏎ 1ファイル1責務。迷ったら分けましょう。
-
----
-
-### 65. Model `/a-model` — 4ステップ
-
-**JP**
-> 下から順に見ていきます。まず Model。
-> ⏎ フィールドは全部 final。変更したいときは copyWith で新しいインスタンスを作ります。
-> ⏎ fromJson で、サーバーの JSON の形をここに閉じ込めます。
-> ⏎ Dart 3 のパターンマッチを使うと、型チェックと取り出しが一度にできます。形が違えば FormatException。
-> ⏎ 実務では freezed と json_serializable で自動生成することも多いです。
-
----
-
-### 66. ApiClient `/a-api-client` — 3ステップ
-
-**JP**
-> ApiClient は HTTP と JSON のことだけ。
-> ⏎ Event というモデルのことも、ビジネスロジックも知りません。
-> ⏎ 失敗はステータスコード付きの ApiException に変換します。
-> ⏎ そして Provider で注入します。ここを差し替えればモックサーバーにも向けられます。
-
----
-
-### 67. Repository `/a-repository` — 4ステップ
-
-**JP**
-> Repository がデータの唯一の窓口です。
-> ⏎ まず interface を定義します。
-> ⏎ 実装では ApiClient から受け取った JSON を Event に変換します。
-> ⏎ キャッシュやオフライン対応を入れるならここ。上の層は気にしなくていい。
-> ⏎ テストでは、この interface を Fake で実装して差し替えます。
-
----
-
-### 68. ViewModel `/a-view-model` — 4ステップ
-
-**JP**
-> ViewModel は AsyncNotifier です。
-> ⏎ build() が最初の読み込み。Repository を watch して fetchEvents を返すだけ。
-> ⏎ 状態は AsyncValue<List<Event>>。
-> ⏎ お気に入りのトグルは「楽観的更新」。サーバーの返事を待たずに、先に UI を変えます。
-> ⏎ 失敗したら元の状態に戻します。ref.mounted で、まだ生きているか確認してから。
-
----
-
-### 69. Screen `/a-screen` — 4ステップ
-
-**JP**
-> 最後に Screen。
-> ⏎ ref.watch で ViewModel の状態を購読します。
-> ⏎ switch で、データがある・エラー・読み込み中を描き分けます。
-> ⏎ ハートが押されたら ViewModel の toggleFavorite を呼ぶだけ。
-> ⏎ Screen にはロジックが一切ありません。
-
----
-
-### 70. 動かしてみる `/a-live` — 1ステップ 🖱
-
-**JP**
-> では、今の4つの層をそのまま実装したアプリを動かします。右の列は、今どの層が動いているかをリアルタイムで表示しています。
-> 起動した瞬間、Screen から ViewModel、Repository、ApiClient、サーバーへとリクエストが降りて、JSON が Model になって上がってきました。
-> ハートを押すと……先に UI が変わって、そのあとサーバーに保存されます。
-> 「遅いネットワーク」をオンにして、リロード。読み込み中もリストは残ったまま、上にプログレスバーが出ます。
-> 最後に「エラーを起こす」をオンにしてハートを押すと……一度変わったハートが、元に戻ります。これが楽観的更新のロールバックです。
-
-*🖱 ①ハートを押す ②「遅いネットワーク」ON → 右上のリロード ③「エラーを起こす」ON → ハート（ロールバック）→ リロード（エラー画面）→ OFF にして「再試行」。リストはマウスで下に引っ張っても更新できる。*
-
----
-
-### 71. overrides で、層ごと差し替える `/a-overrides` — 3ステップ
-
-**JP**
-> 層を分けたご褒美がこれです。
-> ⏎ テストでは ProviderScope の overrides で Repository を Fake に差し替えます。
-> ⏎ ネットワークなしで、UI のテストが書けます。
-> ⏎ 層を分けておくと、どこでも差し替えられる。テストの話は、このあとの「テスト」の章でもう一度出てきます。
-
----
-
-## レンダリング → 何でも描ける → 弱点とネイティブ連携（約17分）
-
-*🖱 は会場で実際に触るスライド。シェーダー系（3D・ワープ・ボタン）は発表前に一度表示してコンパイルを温めておくこと。*
-
----
-
-### 72. 扉：Flutter はどう描画するのか `/r-divider` — 1ステップ
-
-**JP**
-> ここまでで「Flutter のコードがどう動くか」を見てきました。
-> 次は「どうやって画面に出ているのか」。ここが Flutter のいちばんユニークなところです。
-
----
-
-### 73. そのボタン、誰が描いている？ `/r-compare` — 1ステップ 🖱
+### 44. そのボタン、誰が描いている？ `/r-compare` — 1ステップ 🖱
 
 **JP**
 > 画面にボタンが 1 つあるとします。このボタン、誰が描いていると思いますか？
@@ -851,7 +536,7 @@
 
 ---
 
-### 74. Flutter は 3 つの層 `/r-architecture` — 3ステップ
+### 45. Flutter は 3 つの層 `/r-architecture` — 3ステップ
 
 **JP**
 > ⏎ 一番上が Framework。Dart で書かれていて、私たちが書くのはここ。Widget も RenderObject もここにいます。
@@ -861,7 +546,7 @@
 
 ---
 
-### 75. Impeller `/r-impeller` — 1ステップ 🖱
+### 46. Impeller `/r-impeller` — 1ステップ 🖱
 
 **JP**
 > 描画エンジンの名前は Impeller です。昔は Skia を使っていました。
@@ -872,7 +557,7 @@
 
 ---
 
-### 76. ほとんどのアプリは独自のデザイン `/r-own-design` — 1ステップ
+### 47. ほとんどのアプリは独自のデザイン `/r-own-design` — 1ステップ
 
 **JP**
 > ここで質問です。皆さんが普段使っているアプリ、OS 標準の見た目そのままのアプリ、どれくらいありますか？
@@ -881,7 +566,7 @@
 
 ---
 
-### 77. 同じコード、同じピクセル `/r-brand` — 1ステップ 🖱
+### 48. 同じコード、同じピクセル `/r-brand` — 1ステップ 🖱
 
 **JP**
 > これは架空のカフェアプリです。iOS、Android、Web。全部同じコードで、ピクセル単位で同じです。
@@ -891,7 +576,7 @@
 
 ---
 
-### 78. 光る場面・向かない場面 `/r-when` — 2ステップ
+### 49. 光る場面・向かない場面 `/r-when` — 2ステップ
 
 **JP**
 > ⏎ Flutter が光るのは、独自のデザインシステムがあるとき、アニメーションが多いとき、複数のプラットフォームを少人数で作りたいとき。
@@ -900,10 +585,331 @@
 
 ---
 
+## 質問タイム（約2分）
+
+### 50. 質問タイム `/j-questions` — 1ステップ
+
+**JP**
+> ここでちょうど前半が終わりです。Widget、3つのツリー、タップから画素までの流れ、そして Flutter がどう描画しているかまで来ました。
+> ここまでで質問ありますか？ どんな小さなことでも大丈夫です。
+> （手が挙がらなければ）たとえば「StatelessWidget と StatefulWidget はどう使い分ける？」とかでも OK です。
+
+*質問が出なければ 30 秒で切り上げて次へ。後半は Widget の種類と状態管理から。*
+
+---
+
+## 05 — Widget の種類（約5分）
+
+### 51. 扉：Widget の種類 `/w-divider` — 1ステップ
+
+**JP**
+> 中身が分かったところで、Widget の種類を整理しましょう。
+
+---
+
+### 52. StatelessWidget と StatefulWidget `/w-stateless-stateful` — 1ステップ
+
+**JP**
+> 左が StatelessWidget。外から渡された値だけで見た目が決まります。
+> 右が StatefulWidget。自分で覚えておく値、State を持っています。
+> 下のハートは本物です。押すと setState で切り替わります。
+> 迷ったら Stateless から。状態が必要になったら Stateful に。
+
+*🖱 ハートをタップ。*
+
+---
+
+### 53. State の一生 `/w-lifecycle` — 1ステップ
+
+**JP**
+> State には一生があります。右のログに、呼ばれたメソッドがリアルタイムで出ます。
+> 最初に createState、initState、didChangeDependencies、build。
+> setState を押すと、build だけ。props、つまり親から渡す値を変えると didUpdateWidget → build。
+> 上の InheritedWidget を変えると didChangeDependencies。
+> アンマウントすると deactivate → dispose。後片付けは dispose で。
+
+*🖱 setState → props を変える → InheritedWidget を変える → アンマウント → マウント の順に押す。*
+
+---
+
+### 54. InheritedWidget `/w-inherited` — 3ステップ
+
+**JP**
+> ⏎ InheritedWidget は、ツリーの上に置いておくと、下のどこからでも値を取れる仕組み。
+> ⏎ `dependOnInheritedWidgetOfExactType` で依存すると、値が変わったときにその Widget だけが再ビルドされます。
+> ⏎ 毎日使っている `Theme.of(context)` や `MediaQuery.of(context)` も、この仕組みです。後半の状態管理の話の土台になります。
+
+---
+
+### 55. Widget の家系図 `/w-family` — 4ステップ
+
+**JP**
+> ⏎ StatelessWidget：組み立てるだけ。
+> ⏎ StatefulWidget：状態を持つ。
+> ⏎ RenderObjectWidget：実際に描いたり並べたりする。子が0個・1個・複数で3種類。Padding も Row も、ここです。
+> ⏎ ProxyWidget：情報を渡す。InheritedWidget や、Expanded・Positioned のような親にレイアウト情報を伝える ParentDataWidget。
+> 画面に何かを描くのは RenderObjectWidget だけ。ほかは組み立て役と橋渡し役です。
+
+---
+
+## 06 — 状態管理（約12分）
+
+### 56. 扉 `/s-divider` — 1ステップ
+
+**JP**
+> ここからは状態管理です。「その値、誰が持って、誰に届けるのか」。Flutter で一番議論になるテーマです。
+
+---
+
+### 57. 状態には2種類ある `/s-kinds` — 2ステップ
+
+**JP**
+> 状態には大きく2種類あります。
+> ⏎ 1つめは Ephemeral state。TextField に入力中の文字や、選択中のタブのように、1つの Widget の中だけで完結するもの。これは setState で十分です。
+> ⏎ 2つめは App state。ログイン中のユーザー、カート、お気に入り、設定。アプリのあちこちで共有するもの。悩むのはこっちです。
+
+---
+
+### 58. 深い Widget に値を届けるには… `/s-prop-drilling-code` — 3ステップ
+
+**JP**
+> setState だけで App state を扱おうとすると、どうなるか。
+> ⏎ 状態は一番上の State に置くしかありません。
+> ⏎ そして途中の Widget は、自分では使わないのに、子に渡すためだけに受け取ります。HomePage は color を使わないのに、引数に持っている。
+> ⏎ これを Prop drilling と呼びます。Body、Section、Card…と、どこまでも続きます。
+
+---
+
+### 59. 値はどこを通って届く？ `/s-prop-drilling-demo` — 1ステップ 🖱
+
+**JP**
+> 実際に見てみましょう。色を使っているのは Title と ThemedButton の2つだけです。
+> まず「setState ＋ 引数」で「テーマを変える」を押します。
+> ……値が上から1段ずつ降りていって、途中の Widget が全部 rebuild されました。9個です。
+> 今度は InheritedWidget に切り替えて、もう一度押します。
+> ……App から、使っている2つにだけ直接届きました。rebuild は2個だけ。
+
+*🖱 左上の「渡し方」を切り替えて、それぞれ「テーマを変える」を1〜2回押す。rebuild の数字を指さす。*
+
+---
+
+### 60. ツリーの上から、直接届ける `/s-inherited-widget` — 4ステップ
+
+**JP**
+> これが InheritedWidget です。
+> ⏎ ツリーの上に「置いておく」だけ。
+> ⏎ 下のどこからでも of(context) で取り出せます。
+> ⏎ dependOnInheritedWidgetOfExactType で取得した Widget は「依存している」と登録されて、updateShouldNotify が true のときだけ rebuild されます。
+> ⏎ 実は Theme.of(context) も MediaQuery.of(context) も、中身はこれです。皆さんもう毎日使っています。
+
+---
+
+### 61. 標準でも十分。でも… `/s-when-package` — 3ステップ
+
+**JP**
+> ここまで見てきたように、Flutter 標準の setState と InheritedWidget だけでも、ちゃんとアプリは作れます。
+> ⏎ 小さなアプリや個人開発、プロトタイプなら、これで十分。仕組みを理解するにも一番いいです。
+> ⏎ ただ正直に言うと、会社で何人ものエンジニアが触る大きなアプリになると話が変わります。画面も人も増えて、「状態をどこに置くか」のルールが必要になる。API の非同期やエラーも整理したいし、テストで差し替えもしたい。
+> ⏎ なので実際のプロジェクトでは、Riverpod や BLoC のような状態管理パッケージを使うことがほとんどです。今日は Riverpod を中心に見ていきます。
+
+---
+
+### 62. そこで Riverpod `/s-why-riverpod` — 6ステップ
+
+**JP**
+> まず Riverpod。InheritedWidget を使いやすくしたのが Provider パッケージで、同じ作者による次の世代が Riverpod です。
+> ⏎ コンパイル時に安全。Provider が見つからない、という実行時エラーが起きません。
+> ⏎ BuildContext がいらない。Widget の外からでも状態を読めます。
+> ⏎ テストで差し替えが簡単。
+> ⏎ 誰も見ていない状態は自動で破棄されます。
+> ⏎ 非同期が標準で、loading・error・data を AsyncValue で表します。
+> ⏎ そして select で、必要な部分の変化だけを購読できます。
+
+---
+
+### 63. Notifier ＋ Provider ＋ ref `/s-riverpod-basics` — 4ステップ
+
+**JP**
+> 基本の形です。
+> ⏎ Notifier が状態とロジックを持ちます。build() が初期値、increment で state を更新。
+> ⏎ Provider はグローバルに宣言します。グローバルですが、状態自体は ProviderScope の中に閉じています。
+> ⏎ Widget 側は ConsumerWidget にして、build の中で ref.watch。値が変わると rebuild されます。
+> ⏎ ボタンを押したときのようなイベントの中では ref.read を使います。
+
+---
+
+### 64. rebuild されるのは、見ている Widget だけ `/s-riverpod-live` — 1ステップ 🖱
+
+**JP**
+> これは本物の Riverpod が動いています。カードの下の数字は、それぞれの build() が何回呼ばれたかです。
+> 右の +1 を押します。……左の watch しているカードだけが光って、build 回数が増えます。
+> 押している右のボタン自身は read しかしていないので、1のまま。
+> 真ん中は select で「5で割った値」だけを見ているので、5回に1回しか rebuild されません。
+
+*🖱 +1 を5回以上押す。5回目で真ん中のカードが光るのを見せる。*
+
+---
+
+### 65. 非同期の3状態を、型で網羅 `/s-async-value` — 3ステップ
+
+**JP**
+> 実際のアプリはほとんど非同期です。
+> ⏎ AsyncNotifier なら、build() が Future を返すだけ。
+> ⏎ 読み込み中・エラー・成功の3状態は Riverpod が AsyncValue として管理してくれます。
+> ⏎ AsyncValue は sealed class なので、switch で書けば漏れがあるとコンパイラが教えてくれます。
+
+---
+
+### 66. イベントを入れて、状態を受け取る `/s-bloc-code` — 4ステップ
+
+**JP**
+> もう1つの人気の選択肢が BLoC です。
+> ⏎ UI は Event を add するだけ。
+> ⏎ Bloc が on<Event> で Event を State に変換して emit します。
+> ⏎ UI は BlocBuilder で State を受け取って描きます。
+> ⏎ 書く量は増えますが、ルールがはっきりしているので大規模なチームで人気です。
+
+---
+
+### 67. Event の流れと State の流れ `/s-bloc-stream` — 1ステップ 🖱
+
+**JP**
+> 流れを見てみましょう。左のボタンで Event を投げます。
+> ……Event が Stream を通って Bloc に入り、新しい State が別の Stream で UI に届きます。
+> 連打しても、1つずつ順番に処理されます。流れが一方向なので、デバッグしやすいんです。
+
+*🖱 add(Incremented()) を数回、Reset を1回。右下の「受け取った State」の履歴を指さす。*
+
+---
+
+### 68. 状態管理の比較 `/s-comparison` — 1ステップ
+
+**JP**
+> まとめるとこうなります。正解は1つではありません。
+> Widget の中だけなら setState。アプリで共有するなら Riverpod か BLoC。
+> 迷ったら、まずは setState で小さく始めて、共有が必要になったら Riverpod、がおすすめです。チームの慣れも大事な判断材料です。
+
+---
+
+## 07 — アプリの設計（約10分）
+
+### 69. 扉 `/a-divider` — 1ステップ
+
+**JP**
+> 状態管理がわかったところで、実際のアプリをどう分けて作るかを見ていきます。
+
+---
+
+### 70. 4つの層に分ける `/a-layers` — 4ステップ
+
+**JP**
+> Flutter 公式のアーキテクチャガイドに沿った、よくある分け方です。大きく UI layer と Data layer。
+> ⏎ Screen は状態を描くだけ。ボタンが押されたら ViewModel に伝えます。
+> ⏎ ViewModel は画面の状態を持って、操作をロジックに変えます。Riverpod の Notifier がここです。
+> ⏎ Repository はデータの唯一の窓口。JSON を Model に変換します。
+> ⏎ ApiClient は HTTP と JSON だけを知っています。
+> 呼び出しは上から下へ、データは下から上へ。下の層は上の層を知りません。
+
+---
+
+### 71. ディレクトリ構成 `/a-directories` — 4ステップ
+
+**JP**
+> フォルダはこう分けます。
+> ⏎ ui/ の下は画面ごと。Screen と ViewModel を並べます。
+> ⏎ data/ は画面をまたいで共有するもの。
+> ⏎ domain/ にはただのモデルを置きます。
+> ⏎ 1ファイル1責務。迷ったら分けましょう。
+
+---
+
+### 72. Model `/a-model` — 4ステップ
+
+**JP**
+> 下から順に見ていきます。まず Model。
+> ⏎ フィールドは全部 final。変更したいときは copyWith で新しいインスタンスを作ります。
+> ⏎ fromJson で、サーバーの JSON の形をここに閉じ込めます。
+> ⏎ Dart 3 のパターンマッチを使うと、型チェックと取り出しが一度にできます。形が違えば FormatException。
+> ⏎ 実務では freezed と json_serializable で自動生成することも多いです。
+
+---
+
+### 73. ApiClient `/a-api-client` — 3ステップ
+
+**JP**
+> ApiClient は HTTP と JSON のことだけ。
+> ⏎ Event というモデルのことも、ビジネスロジックも知りません。
+> ⏎ 失敗はステータスコード付きの ApiException に変換します。
+> ⏎ そして Provider で注入します。ここを差し替えればモックサーバーにも向けられます。
+
+---
+
+### 74. Repository `/a-repository` — 4ステップ
+
+**JP**
+> Repository がデータの唯一の窓口です。
+> ⏎ まず interface を定義します。
+> ⏎ 実装では ApiClient から受け取った JSON を Event に変換します。
+> ⏎ キャッシュやオフライン対応を入れるならここ。上の層は気にしなくていい。
+> ⏎ テストでは、この interface を Fake で実装して差し替えます。
+
+---
+
+### 75. ViewModel `/a-view-model` — 4ステップ
+
+**JP**
+> ViewModel は AsyncNotifier です。
+> ⏎ build() が最初の読み込み。Repository を watch して fetchEvents を返すだけ。
+> ⏎ 状態は AsyncValue<List<Event>>。
+> ⏎ お気に入りのトグルは「楽観的更新」。サーバーの返事を待たずに、先に UI を変えます。
+> ⏎ 失敗したら元の状態に戻します。ref.mounted で、まだ生きているか確認してから。
+
+---
+
+### 76. Screen `/a-screen` — 4ステップ
+
+**JP**
+> 最後に Screen。
+> ⏎ ref.watch で ViewModel の状態を購読します。
+> ⏎ switch で、データがある・エラー・読み込み中を描き分けます。
+> ⏎ ハートが押されたら ViewModel の toggleFavorite を呼ぶだけ。
+> ⏎ Screen にはロジックが一切ありません。
+
+---
+
+### 77. 動かしてみる `/a-live` — 1ステップ 🖱
+
+**JP**
+> では、今の4つの層をそのまま実装したアプリを動かします。右の列は、今どの層が動いているかをリアルタイムで表示しています。
+> 起動した瞬間、Screen から ViewModel、Repository、ApiClient、サーバーへとリクエストが降りて、JSON が Model になって上がってきました。
+> ハートを押すと……先に UI が変わって、そのあとサーバーに保存されます。
+> 「遅いネットワーク」をオンにして、リロード。読み込み中もリストは残ったまま、上にプログレスバーが出ます。
+> 最後に「エラーを起こす」をオンにしてハートを押すと……一度変わったハートが、元に戻ります。これが楽観的更新のロールバックです。
+
+*🖱 ①ハートを押す ②「遅いネットワーク」ON → 右上のリロード ③「エラーを起こす」ON → ハート（ロールバック）→ リロード（エラー画面）→ OFF にして「再試行」。リストはマウスで下に引っ張っても更新できる。*
+
+---
+
+### 78. overrides で、層ごと差し替える `/a-overrides` — 3ステップ
+
+**JP**
+> 層を分けたご褒美がこれです。
+> ⏎ テストでは ProviderScope の overrides で Repository を Fake に差し替えます。
+> ⏎ ネットワークなしで、UI のテストが書けます。
+> ⏎ 層を分けておくと、どこでも差し替えられる。テストの話は、このあとの「テスト」の章でもう一度出てきます。
+
+---
+
+## 何でも描ける → 弱点とネイティブ連携（約11分）
+
+*🖱 は会場で実際に触るスライド。シェーダー系（3D・ワープ・ボタン）は発表前に一度表示してコンパイルを温めておくこと。*
+
+---
+
 ### 79. 全ピクセルを描けるなら、何でも描ける `/x-anything` — 1ステップ
 
 **JP**
-> さて、全ピクセルを自分で描いている、ということは……逆に言えば、何でも描けるということです。
+> 前半で見たように、Flutter は全ピクセルを自分で描いています。ということは……逆に言えば、何でも描けるということです。
 > ちょっと遊んでみましょう。
 
 ---

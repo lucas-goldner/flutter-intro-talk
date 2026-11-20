@@ -198,11 +198,11 @@ class _AgendaSlide extends FlutterDeckSlideWidget {
     ('Flutter の基本', 'メリット・Everything is a Widget・カウンターアプリ', DeckColors.dart),
     (
       'Widget と 3つのツリー',
-      'Widget / Element / RenderObject とタップの旅',
+      'Widget / Element / RenderObject・タップの旅・描画の仕組み',
       DeckColors.cyan,
     ),
     ('状態管理とアーキテクチャ', 'setState・InheritedWidget・Riverpod・BLoC', DeckColors.blue),
-    ('レンダリングと表現力', '全ピクセルを描く仕組み・3D・シェーダー', DeckColors.purple),
+    ('表現力', '3D・シェーダー・アニメーション', DeckColors.purple),
     ('ネイティブ連携', 'Platform Views・MethodChannel・FFIgen', DeckColors.pink),
     ('AI・テスト・GenUI', 'AI との開発・4種類のテスト・A2UI', DeckColors.orange),
     ('ギャラリー', 'Flutter で作られたアプリたち', DeckColors.green),

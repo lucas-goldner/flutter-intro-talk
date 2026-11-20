@@ -104,12 +104,16 @@ void markNeedsBuild() {
     steps: 1,
     intensity: 0.4,
   ),
-  // Halfway point (~45 min): the basics are done — open the floor.
+];
+
+/// Halfway point (~45 min): the basics — including how Flutter renders — are
+/// done; open the floor. main.dart places this after the rendering chapter.
+final List<FlutterDeckSlideWidget> questionTimeSlides = [
   StatementSlideWidget(
     route: '/j-questions',
     eyebrow: 'Q&A · 質問タイム',
     statement: 'ここまでで、\n質問ありますか？',
-    subtitle: 'Widget・3つのツリー・setState・1フレーム。どんな小さなことでも OK 🙋',
+    subtitle: 'Widget・3つのツリー・1フレーム・描画の仕組み。どんな小さなことでも OK 🙋',
     mood: GradientMood.warm,
   ),
 ];

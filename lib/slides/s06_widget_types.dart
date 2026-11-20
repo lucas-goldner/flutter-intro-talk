@@ -18,7 +18,7 @@ import 'package:flutter_intro_talk/core/widgets/templates.dart';
 final List<FlutterDeckSlideWidget> widgetTypeSlides = [
   DividerSlideWidget(
     route: '/w-divider',
-    number: '04',
+    number: '05',
     label: 'Widget Types',
     title: 'Widget の種類',
     subtitle: '状態を持つ・持たない・描く・渡す',

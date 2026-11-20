@@ -105,9 +105,9 @@ const Set<String> kSkippedRoutes = {};
 
 /// The deck, in presentation order.
 List<FlutterDeckSlideWidget> deckSlides() => [
-      for (final slide in _allSlides())
-        if (!kSkippedRoutes.contains(slide.configuration!.route)) slide,
-    ];
+  for (final slide in _allSlides())
+    if (!kSkippedRoutes.contains(slide.configuration!.route)) slide,
+];
 
 List<FlutterDeckSlideWidget> _allSlides() => [
   // ── 00 · 問題提起 → Flutter の紹介 ─────────────────────────────
@@ -122,14 +122,16 @@ List<FlutterDeckSlideWidget> _allSlides() => [
   ...treeSlides,
   // ── タップの旅（3つのツリーを貫く信号） ─────────────────────────
   ...touchJourneySlides,
+  // ── レンダリングの仕組み ───────────────────────────────────────
+  ...renderingSlides,
+  // ── 質問タイム（前半のまとめ） ─────────────────────────────────
+  ...questionTimeSlides,
   // ── Widget の種類 ──────────────────────────────────────────────
   ...widgetTypeSlides,
   // ── 状態管理 ───────────────────────────────────────────────────
   ...stateSlides,
   // ── アプリのアーキテクチャ ─────────────────────────────────────
   ...architectureSlides,
-  // ── レンダリングの仕組み ───────────────────────────────────────
-  ...renderingSlides,
   // ── 何でも描ける（3D・シェーダー・アニメーション） ───────────────
   ...beyondSlides,
   // ── 弱点とネイティブ連携 ───────────────────────────────────────
