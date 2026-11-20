@@ -71,7 +71,7 @@ final List<FlutterDeckSlideWidget> gallerySlides = [
 // ─────────────────────────────────────────────────────────────────────────────
 // Japan gallery — flip cards with drawn mini mockups.
 // ─────────────────────────────────────────────────────────────────────────────
-enum _Mock { car, jobs, delivery, sushi }
+enum _Mock { car, manga, delivery, sushi }
 
 class _App {
   const _App(
@@ -107,16 +107,16 @@ const _japanApps = [
     _Mock.car,
   ),
   _App(
-    'メルカリ ハロ',
-    'スキマバイト',
-    '2024年3月リリース',
+    'ジャンプTOON',
+    '縦読みマンガ',
+    'CyberAgent が開発・2024年5月創刊',
     [
-      '公式エンジニアリングブログで採用を公表',
-      '少人数で iOS / Android 同時リリース',
-      'デザインシステムも Flutter で構築',
+      'CyberAgent Developers Blog で Flutter 採用を公表',
+      'マンガビューワも Flutter で自作',
+      'GraphQL + コード生成で宣言的に',
     ],
     DeckColors.pink,
-    _Mock.jobs,
+    _Mock.manga,
   ),
   _App(
     '出前館',
@@ -268,7 +268,7 @@ class _MiniMock extends StatelessWidget {
       padding: const EdgeInsets.all(14),
       child: switch (kind) {
         _Mock.car => _car(),
-        _Mock.jobs => _jobs(),
+        _Mock.manga => _manga(),
         _Mock.delivery => _delivery(),
         _Mock.sushi => _sushi(),
       },
@@ -350,68 +350,72 @@ class _MiniMock extends StatelessWidget {
     ],
   );
 
-  Widget _jobs() => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
+  /// Vertical-scroll manga: tall colour panels with speech bubbles and a
+  /// thin scrollbar — the reading UX the app is built around.
+  Widget _manga() => Row(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      Row(
-        children: [
-          for (final d in ['月', '火', '水', '木', '金'])
-            Expanded(
-              child: Container(
-                margin: const EdgeInsets.only(right: 4),
-                padding: const EdgeInsets.symmetric(vertical: 4),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: d == '水' ? accent : Colors.white,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Text(
-                  d,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: d == '水' ? Colors.white : Colors.black54,
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            for (final (flex, tint, bubbleLeft) in const [
+              (3, 0.55, true),
+              (2, 0.30, false),
+              (4, 0.75, true),
+            ])
+              Expanded(
+                flex: flex,
+                child: Container(
+                  margin: const EdgeInsets.only(bottom: 8),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        accent.withValues(alpha: tint),
+                        DeckColors.purple.withValues(alpha: tint * 0.7),
+                      ],
+                    ),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: Align(
+                    alignment: bubbleLeft
+                        ? const Alignment(-0.7, -0.6)
+                        : const Alignment(0.7, 0.5),
+                    child: Container(
+                      width: 46,
+                      height: 26,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
-        ],
+          ],
+        ),
       ),
-      const SizedBox(height: 10),
-      for (var i = 0; i < 3; i++)
-        Container(
-          margin: const EdgeInsets.only(bottom: 8),
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Row(
-            children: [
-              Container(
-                width: 34,
-                height: 34,
-                decoration: BoxDecoration(
-                  color: accent.withValues(alpha: 0.2),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _bar(90),
-                    _bar(56, c: accent.withValues(alpha: 0.5), h: 7),
-                  ],
-                ),
-              ),
-              Text(
-                '¥${1200 + i * 100}',
-                style: const TextStyle(fontSize: 12, color: Colors.black87),
-              ),
-            ],
+      const SizedBox(width: 6),
+      // Scrollbar: you read by scrolling down, one episode at a time.
+      Container(
+        width: 4,
+        decoration: BoxDecoration(
+          color: const Color(0xFFD8D8DE),
+          borderRadius: BorderRadius.circular(2),
+        ),
+        alignment: Alignment.topCenter,
+        child: FractionallySizedBox(
+          heightFactor: 0.3,
+          child: Container(
+            decoration: BoxDecoration(
+              color: accent,
+              borderRadius: BorderRadius.circular(2),
+            ),
           ),
         ),
+      ),
     ],
   );
 
@@ -775,13 +779,13 @@ class _WorldGalleryState extends State<_WorldGallery> {
 // ─────────────────────────────────────────────────────────────────────────────
 const _sourceList = [
   (
-    'メルカリ ハロ アプリの技術スタックの紹介',
-    'engineering.mercari.com/blog/entry/20240606-mercari-hallo-app-tech-stacks',
+    'ジャンプTOON Flutter アプリの全体像',
+    'developers.cyberagent.co.jp/blog/archives/48761/',
     DeckColors.pink,
   ),
   (
-    'メルカリ ハロのデザインシステムと Flutter',
-    'engineering.mercari.com/blog/entry/20241210-flutter-hallo-design-system',
+    'ジャンプTOON マンガビューワ を支える Flutter の技術',
+    'developers.cyberagent.co.jp/blog/archives/49290/',
     DeckColors.pink,
   ),
   (
