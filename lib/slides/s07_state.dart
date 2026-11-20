@@ -5,6 +5,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 import 'package:flutter_intro_talk/core/theme/kaigi_theme.dart';
 import 'package:flutter_intro_talk/core/widgets/deck_components.dart';
+import 'package:flutter_intro_talk/core/widgets/motion.dart';
 import 'package:flutter_intro_talk/core/widgets/templates.dart';
 import 'package:flutter_intro_talk/core/widgets/wwdc_background.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -83,6 +84,16 @@ final List<FlutterDeckSlideWidget> stateSlides = [
       'Theme.of / MediaQuery.of も実はこれ',
     ],
     code: _inheritedCode,
+  ),
+  // Bridge: built-in tools are great — but a team app wants more structure.
+  InteractiveSlideWidget(
+    route: '/s-when-package',
+    eyebrow: 'Built-in vs packages',
+    title: '標準でも十分。でも、チームの大きなアプリでは',
+    footnote: '今日は Riverpod を中心に。最後に BLoC も紹介します。',
+    steps: 3,
+    intensity: 0.45,
+    builder: _whenPackage,
   ),
   CardGridSlideWidget(
     route: '/s-why-riverpod',
@@ -1390,6 +1401,102 @@ class _ComparisonTable extends StatelessWidget {
                 for (final v in values) cell(v, color: rating(v)),
               ],
             ),
+        ],
+      ),
+    );
+  }
+}
+
+// ── /s-when-package ─────────────────────────────────────────────────────────
+
+Widget _whenPackage(BuildContext context, int step) => Column(
+  crossAxisAlignment: CrossAxisAlignment.stretch,
+  children: [
+    Expanded(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            child: StaggerIn(
+              visible: step >= 1,
+              child: const _ScaleCard(
+                badge: 'FLUTTER 標準',
+                title: 'setState・InheritedWidget',
+                accent: DeckColors.green,
+                lines: ['追加パッケージなしで動く', '小さなアプリ・個人開発・プロトタイプ', '仕組みを学ぶには一番いい'],
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 120,
+            child: Center(
+              child: AnimatedOpacity(
+                opacity: step >= 2 ? 1 : 0,
+                duration: const Duration(milliseconds: 400),
+                child: const Icon(
+                  Icons.arrow_forward_rounded,
+                  size: 64,
+                  color: DeckColors.textTertiary,
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            child: StaggerIn(
+              visible: step >= 2,
+              child: const _ScaleCard(
+                badge: '会社の大きなプロジェクト',
+                title: 'Riverpod・BLoC',
+                accent: DeckColors.purple,
+                lines: [
+                  '画面も人も増える → 状態の置き場所にルールが要る',
+                  '非同期（API・キャッシュ・エラー）を整理したい',
+                  'テストで差し替えたい・レビューしやすくしたい',
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
+    const SizedBox(height: 32),
+    StaggerIn(
+      visible: step >= 3,
+      child: const CalloutBox(
+        label: '結論',
+        isProblem: false,
+        lines: ['小さく始めるなら標準で OK。チームで育てるなら、状態管理パッケージを。'],
+      ),
+    ),
+  ],
+);
+
+class _ScaleCard extends StatelessWidget {
+  const _ScaleCard({
+    required this.badge,
+    required this.title,
+    required this.accent,
+    required this.lines,
+  });
+
+  final String badge;
+  final String title;
+  final Color accent;
+  final List<String> lines;
+
+  @override
+  Widget build(BuildContext context) {
+    return DeckCard(
+      accent: accent,
+      padding: const EdgeInsets.all(38),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Pill(badge, color: accent),
+          const SizedBox(height: 22),
+          Text(title, style: DeckText.heading.copyWith(color: accent)),
+          const SizedBox(height: 26),
+          BulletList(items: lines, accent: accent, fontSize: 26),
         ],
       ),
     );
