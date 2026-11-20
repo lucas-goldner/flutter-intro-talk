@@ -29,7 +29,11 @@ Map<String, List<FlutterDeckSlideWidget>> deckSections() => {
   's02': agendaAndBenefitsSlides,
   's03': counterSlides,
   's04': treeSlides,
-  's05': [...touchJourneySlides, ...questionTimeSlides],
+  's05': [
+    ...touchJourneySlides,
+    ...questionTimeSlides,
+    ...secondQuestionTimeSlides,
+  ],
   's06': widgetTypeSlides,
   's07': stateSlides,
   's08': architectureSlides,

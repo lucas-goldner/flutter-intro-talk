@@ -42,7 +42,7 @@ shader deck) and the Rive thanks slide (`outro_slide.dart`).
 | `s02_benefits.dart` | アジェンダ・メリット・Everything is a Widget・レイアウト |
 | `s03_counter.dart` | カウンターアプリのコードを読む |
 | `s04_trees.dart` | Widget / Element / RenderObject |
-| `s05_touch_journey.dart` | タップから画素までの旅（3つのツリーを貫く信号）・質問タイム（`questionTimeSlides`） |
+| `s05_touch_journey.dart` | タップから画素までの旅（3つのツリーを貫く信号）・質問タイム ①②（`questionTimeSlides` / `secondQuestionTimeSlides`） |
 | `s09_rendering.dart` | 他フレームワークとの描画比較・Impeller（04、タップの旅のすぐ後） |
 | `s06_widget_types.dart` | Widget の種類・ライフサイクル・家系図 |
 | `s07_state.dart` | setState / InheritedWidget / Riverpod / BLoC |

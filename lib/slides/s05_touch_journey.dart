@@ -118,6 +118,18 @@ final List<FlutterDeckSlideWidget> questionTimeSlides = [
   ),
 ];
 
+/// Second Q&A, after the native-interop chapter and before AI / testing /
+/// GenUI. main.dart places it between `nativeSlides` and `aiSlides`.
+final List<FlutterDeckSlideWidget> secondQuestionTimeSlides = [
+  StatementSlideWidget(
+    route: '/qa-2',
+    eyebrow: 'Q&A · 質問タイム ②',
+    statement: 'ここまでで、\n質問ありますか？',
+    subtitle: '状態管理・設計・3D とシェーダー・ネイティブ連携。どんな小さなことでも OK 🙋',
+    mood: GradientMood.warm,
+  ),
+];
+
 // ── The tube ────────────────────────────────────────────────────────────────
 
 class _TubeSlide extends FlutterDeckSlideWidget {

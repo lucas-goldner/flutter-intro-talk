@@ -63,6 +63,7 @@ flutter test test/render_slides_test.dart --plain-name s05 # build/shots/ に PN
 | 07 アプリの設計 | `s08_architecture.dart` + `lib/demo_app/` | Screen → ViewModel → Repository → ApiClient が実際に動くアプリ |
 | 何でも描ける | `s10_beyond.dart` | レイマーチングの 3D シーン、ワープポータル、シェーダー UI、アニメーション |
 | 弱点とネイティブ連携 | `s11_native.dart` | Platform Views のレイヤー分解、MethodChannel シミュレーター、FFIgen |
+| 質問タイム ② | `s05_touch_journey.dart` | AI の章の前の区切り（`secondQuestionTimeSlides`） |
 | 08 AI | `s12_ai.dart` | エージェントループ、アプリ内チャット |
 | 09 テスト | `s13_testing.dart` | テストランナー可視化、ゴールデン差分ビューア |
 | 10 GenUI / A2UI | `s14_genui.dart` | A2UI JSON から Widget が生まれる GenUI シミュレーター |

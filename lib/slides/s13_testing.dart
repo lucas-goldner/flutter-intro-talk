@@ -163,17 +163,6 @@ void main() {
 // \$ flutter test integration_test/ -d <device>
 ''',
   ),
-  QuizSlideWidget(
-    route: '/q-quiz',
-    question: 'ネットワークを使う画面を\nWidget テストするには？',
-    options: const [
-      'テスト用の本物の API サーバーを立てる',
-      'Riverpod の overrides で Fake を注入する',
-      'Widget テストではテストできない',
-    ],
-    answer: 1,
-    explanation: 'Repository を差し替えれば、通信なしで「成功」も「エラー」も再現できる。',
-  ),
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
