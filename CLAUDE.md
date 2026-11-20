@@ -43,7 +43,7 @@ shader deck) and the Rive thanks slide (`outro_slide.dart`).
 | `s03_counter.dart` | カウンターアプリのコードを読む |
 | `s04_trees.dart` | Widget / Element / RenderObject |
 | `s05_touch_journey.dart` | タップから画素までの旅（3つのツリーを貫く信号） |
-| `s06_widget_types.dart` | Widget の種類・ライフサイクル・Material/Cupertino |
+| `s06_widget_types.dart` | Widget の種類・ライフサイクル・家系図 |
 | `s07_state.dart` | setState / InheritedWidget / Riverpod / BLoC |
 | `s08_architecture.dart` | Screen → ViewModel → Repository → ApiClient（`lib/demo_app/` が実際に動く） |
 | `s09_rendering.dart` | 他フレームワークとの描画比較・Impeller |

@@ -1,6 +1,5 @@
 import 'dart:math' as math;
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_deck/flutter_deck.dart';
@@ -9,12 +8,11 @@ import 'package:flutter_intro_talk/core/widgets/code_panel.dart';
 import 'package:flutter_intro_talk/core/widgets/deck_components.dart';
 import 'package:flutter_intro_talk/core/widgets/demo_frame.dart';
 import 'package:flutter_intro_talk/core/widgets/motion.dart';
-import 'package:flutter_intro_talk/core/widgets/phone_frame.dart';
 import 'package:flutter_intro_talk/core/widgets/templates.dart';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // 04 · Widget の種類 — Stateless / Stateful, the State lifecycle,
-// InheritedWidget, the Widget family tree, and Material ⇄ Cupertino.
+// InheritedWidget and the Widget family tree.
 // ─────────────────────────────────────────────────────────────────────────────
 
 final List<FlutterDeckSlideWidget> widgetTypeSlides = [
@@ -79,13 +77,6 @@ final size  = MediaQuery.sizeOf(context);''',
     builder: (context, step) => _FamilyTree(step: step),
     steps: 4,
     intensity: 0.4,
-  ),
-  InteractiveSlideWidget(
-    route: '/w-adaptive',
-    eyebrow: 'Material ⇄ Cupertino',
-    title: '同じコードで、Android らしく・iOS らしく',
-    builder: (context, step) => const _AdaptiveDemo(),
-    intensity: 0.35,
   ),
 ];
 
@@ -766,216 +757,4 @@ class _FamilyLines extends CustomPainter {
 
   @override
   bool shouldRepaint(_FamilyLines old) => old.visible != visible;
-}
-
-// ── /w-adaptive ─────────────────────────────────────────────────────────────
-
-class _AdaptiveDemo extends StatefulWidget {
-  const _AdaptiveDemo();
-
-  @override
-  State<_AdaptiveDemo> createState() => _AdaptiveDemoState();
-}
-
-class _AdaptiveDemoState extends State<_AdaptiveDemo> {
-  bool _on = true;
-  bool _checked = false;
-  double _value = 0.4;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        _phone(TargetPlatform.android),
-        const SizedBox(width: 40),
-        const Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
-                child: CodePanel(
-                  '''
-// 同じ1行が、OS ごとの見た目に
-Switch.adaptive(value: on, onChanged: …)
-Slider.adaptive(value: v, onChanged: …)
-Checkbox.adaptive(value: c, onChanged: …)
-CircularProgressIndicator.adaptive()
-
-showAdaptiveDialog(
-  context: context,
-  builder: (_) => AlertDialog.adaptive(
-    title: Text('保存しますか？'),
-    actions: [...],
-  ),
-);''',
-                  language: 'dart',
-                  fileName: 'adaptive.dart',
-                  fontSize: 20,
-                  accent: DeckColors.dart,
-                ),
-              ),
-              SizedBox(height: 20),
-              CalloutBox(
-                label: 'ポイント',
-                isProblem: false,
-                lines: ['Theme の platform で切り替わる', '全 OS で同じデザインにするのも自由'],
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(width: 40),
-        _phone(TargetPlatform.iOS),
-      ],
-    );
-  }
-
-  ThemeData _theme(TargetPlatform platform) => ThemeData(
-    useMaterial3: true,
-    platform: platform,
-    colorScheme: ColorScheme.fromSeed(seedColor: DeckColors.blue),
-  );
-
-  Widget _phone(TargetPlatform platform) {
-    final ios = platform == TargetPlatform.iOS;
-    final theme = _theme(platform);
-    return Column(
-      children: [
-        Pill(
-          ios ? 'iOS ── Cupertino' : 'Android ── Material',
-          color: ios ? DeckColors.text : DeckColors.green,
-          fontSize: 20,
-        ),
-        const SizedBox(height: 14),
-        Expanded(
-          child: FittedBox(
-            child: PhoneFrame(
-              width: 330,
-              style: ios ? PhoneStyle.ios : PhoneStyle.android,
-              accent: ios ? DeckColors.text : DeckColors.green,
-              child: Theme(
-                data: theme,
-                child: Builder(builder: (context) => _screen(context, ios)),
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _screen(BuildContext context, bool ios) {
-    final theme = Theme.of(context);
-    Widget row(String label, Widget child) => Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
-      child: Row(
-        children: [
-          Expanded(child: Text(label, style: const TextStyle(fontSize: 16))),
-          child,
-        ],
-      ),
-    );
-
-    return Scaffold(
-      appBar: AppBar(title: const Text('設定')),
-      body: ListView(
-        padding: const EdgeInsets.symmetric(vertical: 8),
-        children: [
-          row(
-            '通知',
-            Switch.adaptive(
-              value: _on,
-              onChanged: (v) => setState(() => _on = v),
-            ),
-          ),
-          row(
-            '同意する',
-            Checkbox.adaptive(
-              value: _checked,
-              onChanged: (v) => setState(() => _checked = v ?? false),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 6),
-            child: Slider.adaptive(
-              value: _value,
-              onChanged: (v) => setState(() => _value = v),
-            ),
-          ),
-          const SizedBox(height: 10),
-          const Center(child: CircularProgressIndicator.adaptive()),
-          const SizedBox(height: 22),
-          Center(
-            child: ios
-                ? CupertinoButton.filled(
-                    onPressed: () => _dialog(context, theme),
-                    child: const Text('ダイアログ'),
-                  )
-                : FilledButton(
-                    onPressed: () => _dialog(context, theme),
-                    child: const Text('ダイアログ'),
-                  ),
-          ),
-          const SizedBox(height: 12),
-          Center(
-            child: TextButton(
-              onPressed: () => _date(context, theme, ios),
-              child: const Text('日付を選ぶ'),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void _dialog(BuildContext context, ThemeData theme) {
-    final ios = theme.platform == TargetPlatform.iOS;
-    showAdaptiveDialog<void>(
-      context: context,
-      builder: (dialogContext) {
-        Widget action(String label) => ios
-            ? CupertinoDialogAction(
-                onPressed: () => Navigator.pop(dialogContext),
-                child: Text(label),
-              )
-            : TextButton(
-                onPressed: () => Navigator.pop(dialogContext),
-                child: Text(label),
-              );
-        return Theme(
-          data: theme,
-          child: AlertDialog.adaptive(
-            title: const Text('保存しますか？'),
-            content: const Text('同じコードから、OS らしいダイアログ。'),
-            actions: [action('キャンセル'), action('保存')],
-          ),
-        );
-      },
-    );
-  }
-
-  void _date(BuildContext context, ThemeData theme, bool ios) {
-    if (!ios) {
-      showDatePicker(
-        context: context,
-        firstDate: DateTime(2020),
-        lastDate: DateTime(2030),
-        initialDate: DateTime(2026, 11, 19),
-        builder: (context, child) => Theme(data: theme, child: child!),
-      );
-      return;
-    }
-    showCupertinoModalPopup<void>(
-      context: context,
-      builder: (_) => Container(
-        height: 280,
-        color: CupertinoColors.systemBackground,
-        child: CupertinoDatePicker(
-          mode: CupertinoDatePickerMode.date,
-          initialDateTime: DateTime(2026, 11, 19),
-          onDateTimeChanged: (_) {},
-        ),
-      ),
-    );
-  }
 }
