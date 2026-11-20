@@ -3,7 +3,7 @@
 # resolve packages. Override the version with the FLUTTER_VERSION env var.
 set -euo pipefail
 
-FLUTTER_VERSION="${FLUTTER_VERSION:-3.50.0}"
+FLUTTER_VERSION="${FLUTTER_VERSION:-3.47.6}"
 
 # Flutter's tool unpacks the Dart SDK with unzip, which the build image may lack.
 if ! command -v unzip >/dev/null 2>&1; then

@@ -29,7 +29,15 @@ flutter run -d macos --release
 flutter build web --release      # → build/web
 ```
 
-`vercel.json` + `scripts/vercel_*.sh`（Flutter 3.50.0 を clone してビルド。`FLUTTER_VERSION` で変更可）。
+Vercel の設定は `vercel.json` にあります（ダッシュボードの Build & Output Settings は上書きされます）。
+
+| 項目 | 値 |
+| --- | --- |
+| Install Command | `bash scripts/vercel_install.sh` — Flutter 3.47.6 を `./flutter` に clone して `pub get` |
+| Build Command | `bash scripts/vercel_build.sh` — `flutter build web --release` |
+| Output Directory | `build/web` |
+
+Flutter のバージョンは環境変数 `FLUTTER_VERSION` で変更できます。
 
 ### テスト
 
