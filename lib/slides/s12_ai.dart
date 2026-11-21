@@ -79,6 +79,17 @@ final List<FlutterDeckSlideWidget> aiSlides = [
     mood: GradientMood.violet,
     builder: _agentLoop,
   ),
+  // The speaker's own solo-dev loop: build for web first, check on the phone.
+  InteractiveSlideWidget(
+    route: '/ai-web-first',
+    eyebrow: 'My workflow · Web first',
+    title: '私の個人開発フロー：まず Web で作る',
+    footnote: 'Web で速く回して、実機で本物を確かめる。個人開発なら、これが最強のループ（個人の感想です）。',
+    mood: GradientMood.violet,
+    steps: 6,
+    intensity: 0.45,
+    builder: _webFirstLoop,
+  ),
   InteractiveSlideWidget(
     route: '/ai-in-app',
     eyebrow: 'AI in your app',
@@ -923,3 +934,101 @@ class _ChatDemoState extends State<_ChatDemo> {
     );
   }
 }
+
+// ── /ai-web-first ───────────────────────────────────────────────────────────
+
+Widget _webFirstLoop(BuildContext context, int step) => Column(
+  crossAxisAlignment: CrossAxisAlignment.stretch,
+  children: [
+    FlowRow(
+      currentStep: step.clamp(1, 4),
+      steps: const [
+        FlowStep(
+          index: 1,
+          title: 'Claude が実装',
+          subtitle: 'まずは Web アプリとして',
+          accent: DeckColors.purple,
+        ),
+        FlowStep(
+          index: 2,
+          title: 'サンドボックスで起動',
+          subtitle: 'スクショで見た目を確認',
+          accent: DeckColors.cyan,
+        ),
+        FlowStep(
+          index: 3,
+          title: 'CI/CD → TestFlight',
+          subtitle: '約20分で手元のスマホへ',
+          accent: DeckColors.orange,
+        ),
+        FlowStep(
+          index: 4,
+          title: '実機で触る',
+          subtitle: '気づいたことを Claude へ',
+          accent: DeckColors.green,
+        ),
+      ],
+    ),
+    const SizedBox(height: 18),
+    AnimatedOpacity(
+      opacity: step >= 4 ? 1 : 0,
+      duration: const Duration(milliseconds: 400),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(Icons.replay_rounded, color: DeckColors.green, size: 30),
+          const SizedBox(width: 12),
+          Text(
+            '④ から ① へ。スマホだけで、ずっと回せる',
+            style: DeckText.body.copyWith(
+              fontSize: 26,
+              color: DeckColors.green,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
+      ),
+    ),
+    const SizedBox(height: 30),
+    Expanded(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            child: StaggerIn(
+              visible: step >= 5,
+              child: const TitledCard(
+                badge: 'なぜ Web ファースト？',
+                title: 'AI が自分でアプリを動かせる',
+                accent: DeckColors.cyan,
+                lines: [
+                  'iOS / Android ネイティブは Xcode やシミュレータが必要',
+                  '→ AI のサンドボックスの中では動かせない',
+                  'Flutter なら同じコードが Web で動く',
+                  '→ Claude が起動して、スクショで見せてくれる',
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(width: 28),
+          Expanded(
+            child: StaggerIn(
+              visible: step >= 6,
+              child: const TitledCard(
+                badge: '1つのコード',
+                title: 'Web で確認したものが、そのまま実機に',
+                accent: DeckColors.pink,
+                lines: [
+                  'Web 版と iOS 版は同じ Dart のコード',
+                  '見た目も同じ。全ピクセルを Flutter が描くから',
+                  'だから Web で速く回して、TestFlight で仕上げる',
+                  'ほかのフレームワークでは、ここまでスムーズにいかない',
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
+  ],
+);
