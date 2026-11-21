@@ -19,7 +19,7 @@
 | # | スライド | ルート | 節約 |
 | --- | --- | --- | --- |
 | 6 | 何が起きるか | `/p-costs` | 約1分 |
-| 10 | Flutter の歩み | `/p-history` | 約1.5分 |
+| 11 | Flutter の歩み | `/p-history` | 約1.5分 |
 | 18 | 開発体験 | `/b-devex` | 約1分 |
 | 22 | 継承ではなく、組み合わせ | `/b-composition` | 約1分 |
 | 28 | Code walk 1：main → runApp → MaterialApp | `/c-walk-main` | 約1分 |
@@ -40,11 +40,11 @@
 | 110 | Golden テスト | `/q-golden` | 約1分 |
 | 123 | 出典 | `/m-sources` | 約0.5分 |
 
-> 優先して残すもの: 2チーム問題 → Flutter とは → 自己紹介 → カウンターアプリ → 3つのツリー → **信号のチューブ** → Riverpod のライブデモ → アーキテクチャのライブアプリ → 3D シーン → MethodChannel / FFIgen → GenUI シミュレーター → ギャラリー。
+> 優先して残すもの: 2チーム問題 → 自己紹介 → Flutter とは → カウンターアプリ → 3つのツリー → **信号のチューブ** → Riverpod のライブデモ → アーキテクチャのライブアプリ → 3D シーン → MethodChannel / FFIgen → GenUI シミュレーター → ギャラリー。
 
 ---
 
-## Opening — 問題提起から Flutter へ（約12分）
+## Opening — 問題提起（約7分）
 
 ### 1. タイトル `/p-title` — 1ステップ
 
@@ -121,19 +121,37 @@
 > ⏎ React Native。JS から各 OS のネイティブ UI 部品を呼び出します。
 > ⏎ Kotlin Multiplatform。ロジックを共有して、UI は各 OS、または Compose Multiplatform で。
 > ⏎ そして Flutter。自前のエンジンで、全ピクセルを自分で描きます。
-> 違いは「誰が画面を描くか」。ここは後半のレンダリングの章でまた戻ってきます。
+> 違いは「誰が画面を描くか」。ここは、このあとの描画の章でまた戻ってきます。
+> ……その最後の選択肢の話をする前に、少しだけ自己紹介させてください。
 
 ---
 
-### 8. 1つのコードで `/p-one-code` — 1ステップ
+## 自己紹介（約1分）
+
+### 8. 自己紹介 `/speaker` — 8ステップ
 
 **JP**
+> 改めまして、簡単に自己紹介を。ドイツとブラジルのハーフです。
+> Google Developer Expert として Flutter をやっていて、Flutter Tokyo の運営もしています。
+> 今は YOUTRUST でモバイルアプリを作っています。
+
+
+> ⏎ **1–3**: 10x → 吠える → 1x ／ ⏎ **4–8**: 写真 → 国籍 → GDE → Flutter Tokyo → YOUTRUST
+
+---
+
+## Flutter とは — Dart・Hot Reload（約5分）
+
+### 9. 1つのコードで `/p-one-code` — 1ステップ
+
+**JP**
+> さて、さっきの最後の選択肢です。
 > 1つのコードで、iOS も Android も、Web も Desktop も。
 > それが Flutter です。
 
 ---
 
-### 9. Flutter とは `/p-what-is-flutter` — 4ステップ
+### 10. Flutter とは `/p-what-is-flutter` — 4ステップ
 
 **JP**
 > ⏎ Flutter は Google が開発しているオープンソースの UI ツールキットです。
@@ -143,7 +161,7 @@
 
 ---
 
-### 10. Flutter の歩み `/p-history` — 8ステップ
+### 11. Flutter の歩み `/p-history` — 8ステップ
 
 **JP**
 > ⏎ 始まりは2015年、"Sky" という名前で Dart Developer Summit で発表されました。
@@ -157,7 +175,7 @@
 
 ---
 
-### 11. Dart `/p-dart` — 2ステップ
+### 12. Dart `/p-dart` — 2ステップ
 
 **JP**
 > Flutter の言語、Dart です。Java や TypeScript を書ける人なら、ほぼそのまま読めると思います。
@@ -169,7 +187,7 @@
 
 ---
 
-### 12. Hot Reload `/p-hot-reload` — 1ステップ
+### 13. Hot Reload `/p-hot-reload` — 1ステップ
 
 **JP**
 > 開発体験の目玉、Hot Reload をやってみます。
@@ -181,20 +199,6 @@
 > 「保存したら、もう動いている」。これに慣れると、もう戻れません。
 
 *🖱 ＋ を 5回ほど押す → 色・タイトル・アイコンのチップを切り替える → 最後に Hot Restart。*
-
----
-
-## 自己紹介（約1分）
-
-### 13. 自己紹介 `/speaker` — 8ステップ
-
-**JP**
-> 簡単に自己紹介を。ドイツとブラジルのハーフです。
-> Google Developer Expert として Flutter をやっていて、Flutter Tokyo の運営もしています。
-> 今は YOUTRUST でモバイルアプリを作っています。
-
-
-> ⏎ **1–3**: 10x → 吠える → 1x ／ ⏎ **4–8**: 写真 → 国籍 → GDE → Flutter Tokyo → YOUTRUST
 
 ---
 

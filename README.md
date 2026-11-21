@@ -50,8 +50,9 @@ flutter test test/render_slides_test.dart --plain-name s05 # build/shots/ に PN
 
 | 章 | ファイル | 主なインタラクティブデモ |
 | --- | --- | --- |
-| Opening | `s01_problem.dart` | 「同じ機能を2回作る」シミュレーター、iOS/Android 間違い探し、Hot Reload |
+| Opening | `s01_problem.dart`（`titleAndProblemSlides`） | 「同じ機能を2回作る」シミュレーター、iOS/Android 間違い探し |
 | 自己紹介 | `speaker_slide.dart` | Rive（シェーダートークと同じ） |
+| Flutter とは | `s01_problem.dart`（`introFlutterSlides`） | Hot Reload |
 | 01 なぜ Flutter？ | `s02_benefits.dart` | 6プラットフォーム切り替え、Widget X-ray、レイアウトプレイグラウンド |
 | 02 カウンターアプリ | `s03_counter.dart` | 本物のカウンター + テンプレートコード、setState on/off |
 | 03 3つのツリー | `s04_trees.dart` | 3ツリーエクスプローラー、リビルド可視化 |

@@ -114,6 +114,8 @@ List<FlutterDeckSlideWidget> _allSlides() => [
   ...titleAndProblemSlides,
   // ── 自己紹介 ───────────────────────────────────────────────────
   const S02Speaker(),
+  // ── Flutter とは・Dart・Hot Reload ─────────────────────────────
+  ...introFlutterSlides,
   // ── アジェンダ・Flutter のメリット・Everything is a Widget ───────
   ...agendaAndBenefitsSlides,
   // ── カウンターアプリ ───────────────────────────────────────────

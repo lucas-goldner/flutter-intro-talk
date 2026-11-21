@@ -38,7 +38,7 @@ shader deck) and the Rive thanks slide (`outro_slide.dart`).
 
 | File | Chapter |
 | --- | --- |
-| `s01_problem.dart` | タイトル・2チーム2コードベース問題・Flutter とは・Dart・Hot Reload |
+| `s01_problem.dart` | タイトル・2チーム2コードベース問題（`titleAndProblemSlides`）→ 自己紹介 → Flutter とは・Dart・Hot Reload（`introFlutterSlides`） |
 | `s02_benefits.dart` | アジェンダ・メリット・Everything is a Widget・レイアウト |
 | `s03_counter.dart` | カウンターアプリのコードを読む |
 | `s04_trees.dart` | Widget / Element / RenderObject |

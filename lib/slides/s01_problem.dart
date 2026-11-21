@@ -16,8 +16,8 @@ import 'package:flutter_intro_talk/core/widgets/phone_frame.dart';
 import 'package:flutter_intro_talk/core/widgets/templates.dart';
 import 'package:flutter_intro_talk/core/widgets/wwdc_background.dart';
 
-/// Opening: title → the "two teams, two codebases" problem → Flutter.
-/// The speaker slide is inserted right after this list by main.dart.
+/// Opening: title → the "two teams, two codebases" problem.
+/// main.dart inserts the speaker slide after this list, then [introFlutterSlides].
 final List<FlutterDeckSlideWidget> titleAndProblemSlides = [
   const _TitleSlide(),
   StatementSlideWidget(
@@ -98,6 +98,10 @@ final List<FlutterDeckSlideWidget> titleAndProblemSlides = [
     steps: 4,
     builder: _options,
   ),
+];
+
+/// "Enter Flutter": what it is, its history, Dart and Hot Reload.
+final List<FlutterDeckSlideWidget> introFlutterSlides = [
   StatementSlideWidget(
     route: '/p-one-code',
     eyebrow: 'Enter Flutter',

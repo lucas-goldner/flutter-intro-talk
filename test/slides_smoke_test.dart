@@ -25,7 +25,7 @@ import 'package:flutter_intro_talk/slides/s15_gallery.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 Map<String, List<FlutterDeckSlideWidget>> deckSections() => {
-  's01': titleAndProblemSlides,
+  's01': [...titleAndProblemSlides, ...introFlutterSlides],
   's02': agendaAndBenefitsSlides,
   's03': counterSlides,
   's04': treeSlides,
